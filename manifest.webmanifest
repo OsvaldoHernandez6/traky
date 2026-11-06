@@ -1,7 +1,7 @@
 {
   "name": "Traky",
   "short_name": "Traky",
-  "description": "Hábitos y tareas con palancas, en una hoja simple.",
+  "description": "Hábitos y cosas por hacer, con su próximo paso.",
   "lang": "es-CL",
   "start_url": "./",
   "scope": "./",

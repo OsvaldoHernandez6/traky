@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Traky</title>
-<meta name="description" content="Hábitos y tareas con palancas, en una hoja simple.">
+<meta name="description" content="Hábitos y cosas por hacer, con su próximo paso.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icons/favicon.png">
 <style>
-/* Traky · una sola paleta clara, un acento (azul) para acción, progreso y palanca. */
+/* Traky · una sola paleta clara, un acento (azul) para acción, progreso y próximo paso. */
 :root{
   --bg:#FFFFFF; --soft:#F4F5F7; --sunken:#F1F2F5; --line:#ECEDF1; --line-2:#D6D8E0;
   --fg:#16171C; --fg-2:#3C3E49; --muted:#5F6270; --faint:#A4A7B2;
@@ -193,48 +193,36 @@ button.gc:active{background:var(--accent-soft)}
 .lvcard .lv{display:flex;gap:8px;align-items:flex-start;font-size:15px;font-weight:500;line-height:1.35}
 .lvcard .lv svg{stroke:var(--accent);flex:none;margin-top:3px}
 
-/* tasks */
-.kgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 -6px}
-.kbtn{min-height:54px;padding:6px;border-radius:12px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left}
-.kbtn b{font-family:var(--mono);font-size:18px;font-weight:500;line-height:1.2}
-.kbtn span{font-size:12px;color:var(--muted)}
-.kbtn[aria-pressed="true"]{background:var(--sunken);box-shadow:inset 0 0 0 1.5px var(--fg)}
-.kbtn.blue b{color:var(--accent)}
-.fbar{display:flex;align-items:center;justify-content:space-between;height:34px}
-.fbar span{font-size:13.5px;color:var(--fg-2)}
-.fbar button{height:34px;padding:0 12px;border-radius:17px;background:var(--sunken);color:var(--accent);font-size:13.5px;font-weight:500}
-.tsheet{border-top:1px solid var(--line-2)}
-.cathead{display:flex;align-items:center;gap:10px;height:48px;border-bottom:1px solid;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
-.cathead .tog{flex:1;display:flex;align-items:center;gap:10px;height:100%;text-align:left;min-width:0}
-.cathead .dot{width:8px;height:8px;border-radius:4px;flex:none}
-.cathead .nm{font-size:11px;letter-spacing:.09em;font-weight:600;flex:1;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cathead .ct{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.cathead .chev{stroke:var(--muted);transition:transform .2s;flex:none}
-.cathead .more{color:var(--muted)}
-.deck{padding:12px 16px 26px;border-bottom:1px solid}
-.deck button{position:relative;display:block;width:100%;text-align:left}
-.deck .l2,.deck .l1{position:absolute;border-radius:14px;background:#fff;display:block}
-.deck .l2{left:22px;right:22px;top:12px;bottom:-12px;opacity:.6}
-.deck .l1{left:11px;right:11px;top:6px;bottom:-6px;opacity:.85}
-.deck .front{position:relative;display:flex;flex-direction:column;gap:6px;padding:13px 14px;border-radius:14px;background:#fff}
-.deck .t1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.deck .t1 b{font-size:15.5px;font-weight:500;min-width:0}
-.deck .lvm{display:flex;gap:7px;font-size:13px;line-height:1.35}
-.deck .lvm svg{stroke:var(--accent);flex:none;margin-top:2px}
-.deck .more{font-size:12.5px;font-weight:500}
-.trow{display:grid;grid-template-columns:52px minmax(0,1fr);border-bottom:1px solid var(--line)}
-.trow .st{width:52px;height:52px;display:grid;place-items:center;margin-top:1px}
-.trow .op{display:flex;flex-direction:column;gap:3px;padding:15px max(18px,env(safe-area-inset-right,0px)) 15px 0;text-align:left;min-width:0;width:100%}
-.trow .l1{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-.trow .l1 b{font-size:16px;font-weight:500;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+/* cosas por hacer: lista mínima */
+.tsub{font-size:13.5px;color:var(--muted);margin-top:-4px}
+.tlist{padding-bottom:8px}
+.cgroup+.cgroup{margin-top:14px}
+.chd{display:flex;align-items:center;height:44px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(4px,env(safe-area-inset-right,0px))}
+.chd .tog{flex:1;display:flex;align-items:center;gap:9px;height:100%;text-align:left;min-width:0}
+.chd .dot{width:8px;height:8px;border-radius:4px;flex:none}
+.chd .nm{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chd .ct{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-left:2px}
+.chd .chev{stroke:var(--faint);transition:transform .2s;flex:none;margin-left:auto;margin-right:6px}
+.chd .more{color:#B7BAC4;width:40px}
+.trow{display:flex;align-items:flex-start;border-top:1px solid var(--line);min-height:52px}
+.trow .st{width:50px;height:52px;display:grid;place-items:center;flex:none;margin-left:max(0px,calc(env(safe-area-inset-left,0px) - 4px))}
+.trow .op{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:14px max(18px,env(safe-area-inset-right,0px)) 14px 0;text-align:left}
+.trow .l1{display:flex;align-items:baseline;gap:10px}
+.trow .l1 b{flex:1;min-width:0;font-size:16px;font-weight:400;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .trow .dt{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;flex:none}
 .trow .dt.late{color:var(--danger)}
-.trow .ds{font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trow .nx{font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+.trow .nx i{font-style:normal;color:var(--accent);margin-right:5px}
 .trow.done .l1 b{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--faint)}
-.lvchip{display:flex;gap:8px;align-items:flex-start;margin-top:7px;padding:8px 10px;border-radius:10px;background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent-line);font-size:13.5px;line-height:1.35}
-.lvchip svg{stroke:var(--accent);flex:none;margin-top:2px}
-.lvchip em{font-style:normal;font-size:10px;letter-spacing:.09em;font-weight:600;color:var(--accent);margin-right:5px}
-
+.cempty{padding:0 max(18px,env(safe-area-inset-right,0px)) 10px max(36px,env(safe-area-inset-left,0px));font-size:13.5px;color:var(--faint)}
+.donetog{display:flex;align-items:center;gap:8px;height:48px;margin-top:10px;font-size:14px;color:var(--muted);width:100%}
+.donetog svg{stroke:var(--faint);transition:transform .2s}
+.nxlist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.nxrow{display:flex;flex-direction:column;gap:3px;padding:12px 0;border-bottom:1px solid var(--line);text-align:left;width:100%}
+.nxrow b{font-size:15.5px;font-weight:500;line-height:1.35;display:flex;gap:7px}
+.nxrow b i{font-style:normal;color:var(--accent);flex:none}
+.nxrow>span{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px;padding-left:20px}
+.nxrow>span em{width:6px;height:6px;border-radius:3px;flex:none}
 /* tab bar */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));height:calc(var(--tab) + var(--sb));padding:6px max(12px,env(safe-area-inset-left,0px)) var(--sb);background:rgba(255,255,255,.92);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-top:1px solid #E7E8ED}
 .tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:500;color:#6F727E;text-decoration:none}
@@ -317,49 +305,6 @@ button.gc:active{background:var(--accent-soft)}
 .install{margin-top:10px;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:14px;line-height:1.4;color:var(--fg-2)}
 .install b{color:var(--fg)}
 .install button{flex:none;color:var(--muted);font-size:13px;height:28px}
-/* login */
-body.auth{padding-bottom:0}
-body.auth .tabbar{display:none}
-.login{min-height:calc(100dvh - var(--st));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding-block:40px calc(40px + var(--sb))}
-.lg-mark{width:88px;height:88px;border-radius:24px;background:var(--accent);display:grid;place-items:center;font-size:48px;line-height:1;box-shadow:0 14px 30px -14px rgba(52,71,230,.55)}
-.login h1{font-size:32px;font-weight:700;letter-spacing:-.01em;margin-top:6px}
-.login p{margin:0 0 14px;color:var(--muted);max-width:30ch;line-height:1.45}
-.gbtn{height:52px;width:100%;max-width:320px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px var(--line-2);display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:600;color:var(--fg)}
-.gbtn:active{background:var(--soft)}
-.gbtn:disabled{opacity:.6}
-.login small{font-size:12.5px;color:var(--faint);max-width:32ch;line-height:1.4;margin-top:8px}
-.login small a{color:var(--muted)}
-/* cuenta */
-.acct{display:flex;align-items:center;gap:12px;padding:4px 0}
-.acct .av{width:40px;height:40px;border-radius:20px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
-.acct div{display:flex;flex-direction:column;min-width:0}
-.acct b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.acct div span{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
-.sync{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-.sync i{width:8px;height:8px;border-radius:4px;background:#2F8F7E;flex:none}
-.sync[data-state="pending"] i{background:var(--accent);animation:pulse 1s ease-in-out infinite alternate}
-.sync[data-state="error"] i{background:#C98A2B}
-.sync[data-state="local"] i{background:var(--faint)}
-@keyframes pulse{to{opacity:.3}}
-/* progreso mes a mes */
-.hlist+.mprog{border-top:0;padding-top:0}
-.mprog{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
-.mph{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.mph .dl{font-family:var(--mono);font-size:12px;color:var(--muted)}
-.mph .dl.up{color:#1F6B5E}
-.mph .dl.down{color:var(--danger)}
-.mbars{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px;max-width:520px}
-.mbar{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:4px 0;border-radius:10px}
-.mbar em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
-.mbar .col{width:100%;max-width:28px;height:96px;border-radius:7px;background:var(--sunken);display:flex;align-items:flex-end;overflow:hidden}
-.mbar .col i{display:block;width:100%;background:#AEB7F5;border-radius:7px 7px 0 0;transition:height .3s}
-.mbar.cur .col i{background:var(--accent)}
-.mbar .ml{font-size:11.5px;color:var(--muted);text-transform:capitalize}
-.mbar.on .ml{color:var(--fg);font-weight:600}
-.mbar.on .col{box-shadow:0 0 0 1.5px var(--fg)}
-.mbar:active{background:var(--accent-soft)}
-.mpk{display:flex;gap:6px 18px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
-.mpk b{color:var(--fg);font-weight:600}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -368,124 +313,19 @@ body.auth .tabbar{display:none}
 <nav class="tabbar" id="tabbar" aria-label="Secciones"></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="vendor/supabase.js"></script>
 <script>
 /* =====================================================================
-   Traky — hábitos y tareas con palancas.
-   Datos: en la cuenta de cada persona (Supabase, login con Google) y una
-   copia en el teléfono para funcionar sin conexión. Store + Sync son el
-   único punto que lee/escribe.
+   Traky — hábitos y cosas por hacer con su próximo paso.
+   Datos: se guardan en este teléfono (localStorage) bajo una sola llave.
+   La capa Store es el único punto que lee/escribe: para sincronizar con
+   una base de datos (Supabase, Firebase, API propia) basta reemplazarla.
    ===================================================================== */
-/* ---------- cuenta (Supabase + Google) ----------
-   Cada persona tiene una fila en la tabla traky_data con todo su Traky.
-   El teléfono guarda una copia (funciona sin conexión) y la sube al guardar. */
-const SB_URL = 'https://hwpbuegdhlhxiyqrvior.supabase.co';
-const SB_KEY = 'sb_publishable_tNdzbZRnLKlPx4pST1g7ig_wgCE-cPc';
-let sb = null;
-try{ sb = window.supabase.createClient(SB_URL, SB_KEY, { auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:'implicit', storageKey:'traky.auth' } }); }catch(e){}
-let USER = null;                 // {id, email, name} cuando hay sesión
-const LOCAL_KEY = 'traky.v1';    // datos sin cuenta (versiones anteriores)
-let KEY = LOCAL_KEY;             // copia local activa: LOCAL_KEY o LOCAL_KEY.<id usuario>
+const KEY = 'traky.v1';
 const fresh = () => ({ v:1, habits:[], log:{}, cats:[], tasks:[], meta:{ mantra:{}, open:{} } });
-const normalize = d => Object.assign(fresh(), d||{}, { meta: Object.assign(fresh().meta, (d&&d.meta)||{}) });
-const ls = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
-function readLocal(key){ const r = ls.get(key); if(!r) return null; try{ return normalize(JSON.parse(r)); }catch(e){ return null; } }
 const Store = {
-  load(){ return readLocal(KEY) || fresh(); },
-  write(d){ return ls.set(KEY, JSON.stringify(d)); },
-  save(d){ const ok = this.write(d); Sync.touch(); return ok; }
+  load(){ try{ const r = localStorage.getItem(KEY); if(r){ const d = JSON.parse(r); return Object.assign(fresh(), d, { meta: Object.assign(fresh().meta, d.meta||{}) }); } }catch(e){} return fresh(); },
+  save(d){ try{ localStorage.setItem(KEY, JSON.stringify(d)); return true; }catch(e){ return false; } }
 };
-const Sync = {
-  state: 'local', t: 0, busy: false, again: false,
-  rev(){ return +(ls.get(KEY+'.rev') || 0); },
-  setRev(n){ ls.set(KEY+'.rev', String(n)); },
-  dirty(){ return ls.get(KEY+'.dirty') === '1'; },
-  setDirty(b){ b ? ls.set(KEY+'.dirty','1') : ls.del(KEY+'.dirty'); },
-  touch(){
-    if(!USER) return;
-    this.setRev(Date.now()); this.setDirty(true); this.state = 'pending';
-    clearTimeout(this.t); this.t = setTimeout(() => this.push(), 700); this.paint();
-  },
-  async push(){
-    if(!USER || !sb || !this.dirty()) return true;
-    if(this.busy){ this.again = true; return false; }
-    this.busy = true; const rev = this.rev();
-    let ok = false;
-    try{ const { error } = await sb.from('traky_data').upsert({ user_id: USER.id, data: D, rev }); ok = !error; }catch(e){}
-    this.busy = false;
-    if(ok && this.rev() === rev) this.setDirty(false);
-    this.state = ok ? (this.dirty() ? 'pending' : 'ok') : 'error';
-    if(this.again){ this.again = false; this.push(); }
-    this.paint(); return ok && !this.dirty();
-  },
-  async fetch(){
-    try{ const { data, error } = await sb.from('traky_data').select('data,rev').eq('user_id', USER.id).maybeSingle(); if(error) return { error }; return { row: data }; }
-    catch(e){ return { error: e }; }
-  },
-  async pull(){
-    if(!USER || !sb) return;
-    if(this.dirty()){ await this.push(); return; }
-    const { row, error } = await this.fetch();
-    if(error){ this.state = 'error'; this.paint(); return; }
-    if(row && +row.rev > this.rev()){ D = migrate(normalize(row.data)); Store.write(D); this.setRev(+row.rev); if(!sheetEl) render(); }
-    this.state = 'ok'; this.paint();
-  },
-  label(){ return { ok:'Sincronizado', pending:'Guardando…', error:'Sin conexión · se sincroniza al volver', local:'Solo en este teléfono' }[this.state]; },
-  paint(){ const el = document.querySelector('[data-sync]'); if(el){ el.dataset.state = this.state; el.querySelector('span').textContent = this.label(); } }
-};
-async function enterUser(u){
-  USER = { id:u.id, email:u.email || '', name:(u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || '' };
-  ls.set('traky.lastUser', JSON.stringify(USER)); ls.del('traky.mode');
-  KEY = LOCAL_KEY + '.' + USER.id;
-  const local = readLocal(KEY);
-  const { row, error } = await Sync.fetch();
-  if(row && (!local || (+row.rev > Sync.rev() && !Sync.dirty()))){
-    D = migrate(normalize(row.data)); Store.write(D); Sync.setRev(+row.rev); Sync.setDirty(false); Sync.state = 'ok';
-  } else if(local){
-    D = migrate(local); Sync.state = error ? 'error' : 'ok';
-    if(Sync.dirty() || (!row && !error)){ Sync.setDirty(true); Sync.push(); }
-  } else if(!error){
-    // Primera vez con esta cuenta: lo que había en el teléfono pasa a la cuenta.
-    const phone = readLocal(LOCAL_KEY);
-    D = migrate(phone || fresh()); Store.write(D); Sync.touch();
-    if(phone && (phone.habits.length || phone.tasks.length)) setTimeout(() => toast('Tus datos de este teléfono quedaron en tu cuenta'), 400);
-  } else {
-    D = migrate(fresh()); Sync.state = 'error';
-  }
-}
-async function signIn(){
-  if(!sb){ toast('No se pudo conectar. Revisa tu conexión.'); return; }
-  const { error } = await sb.auth.signInWithOAuth({ provider:'google', options:{ redirectTo: location.origin + location.pathname, queryParams:{ prompt:'select_account' } } });
-  if(error) toast('No se pudo abrir Google. Intenta de nuevo.');
-}
-async function signOut(){
-  const ok = await Sync.push();
-  const go = async () => {
-    try{ await sb.auth.signOut(); }catch(e){}
-    ['', '.rev', '.dirty'].forEach(s => ls.del(KEY + s)); ls.del('traky.lastUser');
-    USER = null; KEY = LOCAL_KEY; D = fresh(); Sync.state = 'local'; closeSheet(true); showLogin();
-  };
-  if(ok) go();
-  else confirmSheet('Cerrar sesión', 'Hay cambios que aún no se subieron a tu cuenta porque no hay conexión. Si cierras sesión ahora se perderán.', 'Cerrar igual', go);
-}
-function useLocal(){ ls.set('traky.mode','local'); USER = null; KEY = LOCAL_KEY; D = migrate(Store.load()); Sync.state = 'local'; openApp(); }
-function showLogin(){
-  document.body.classList.add('auth');
-  document.getElementById('tabbar').innerHTML = '';
-  document.getElementById('view').innerHTML = `<div class="login wrap">
-    <div class="lg-mark" aria-hidden="true">🤘</div>
-    <h1>Traky</h1>
-    <p>Tus hábitos y tareas con palancas, guardados en tu cuenta. Revisa tu progreso mes a mes desde cualquier teléfono.</p>
-    <button class="gbtn" data-auth="google"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continuar con Google</span></button>
-    <button class="btn btn-t" data-auth="local">Usar solo en este teléfono</button>
-    <small>Solo usamos tu nombre y correo para identificar tu cuenta. <a href="privacidad.html">Privacidad</a></small>
-  </div>`;
-}
-document.addEventListener('click', e => {
-  const a = e.target.closest('[data-auth]'); if(!a) return;
-  if(a.dataset.auth === 'google'){ a.disabled = true; signIn().finally(() => { a.disabled = false; }); }
-  else useLocal();
-});
 function migrate(d){
   for(const h of d.habits){
     if(!Array.isArray(h.sched)) h.sched = [{from: h.createdAt || dkeyNow(), freq: h.freq || 'daily', days: h.days || []}];
@@ -614,15 +454,15 @@ const monthHabits = mi => D.habits.filter(h => (!h.createdAt || h.createdAt <= m
 
 /* ---------- tasks domain ---------- */
 const catOf = id => D.cats.find(c => c.id === id);
-const isBlocked = t => t.status !== 'completada' && !!t.palanca && !t.palancaOk;
+const hasNext = t => t.status !== 'completada' && !!(t.palanca||'').trim();
 const isLate = t => t.date && t.status !== 'completada' && t.date < today();
 const RANK = {progreso:0, pendiente:1, completada:2};
-const isOpen = id => D.meta.open[id] ?? (D.cats.length ? D.cats[0].id === id : true);
-const sortTasks = (a,b) => (RANK[a.status]-RANK[b.status]) || ((isBlocked(b)?1:0)-(isBlocked(a)?1:0)) || ((a.date||'9')<(b.date||'9')?-1:(a.date||'9')>(b.date||'9')?1:0) || (a.createdAt||0)-(b.createdAt||0);
+const isOpen = id => D.meta.open[id] ?? true;
+const sortTasks = (a,b) => (RANK[a.status]-RANK[b.status]) || ((a.date||'9')<(b.date||'9')?-1:(a.date||'9')>(b.date||'9')?1:0) || (a.createdAt||0)-(b.createdAt||0);
 const dateLabel = t => !t.date ? '' : shortDate(t.date) + (isLate(t) ? ' · vencida' : '');
 
 /* ---------- UI state + routing ---------- */
-const UI = { month: today().slice(0,7), filter: null, hview: 'week', sel: today() };
+const UI = { month: today().slice(0,7), showDone: false, hview: 'week', sel: today() };
 const weekStart = k => { let x = k; while(dow(x) !== 1) x = addDays(x, -1); return x; };
 const activeOn = (h, k) => (!h.createdAt || h.createdAt <= k) && (!h.archivedAt || h.archivedAt > k);
 const ROUTES = ['hoy','habitos','tareas'];
@@ -631,12 +471,10 @@ window.addEventListener('hashchange', () => { render(); window.scrollTo(0,0); })
 
 /* ---------- render ---------- */
 let lastDay = today();
-function openApp(){ document.body.classList.remove('auth'); render(); }
 function render(){
-  if(document.body.classList.contains('auth')) return;
   if(lastDay !== today()){ lastDay = today(); }
   const r = route();
-  const tabs = [['hoy','Hoy',I.tHoy],['habitos','Hábitos',I.tHab],['tareas','Tareas',I.tTar]];
+  const tabs = [['hoy','Hoy',I.tHoy],['habitos','Hábitos',I.tHab],['tareas','Por hacer',I.tTar]];
   document.getElementById('tabbar').innerHTML = tabs.map(([id,l,ic]) => `<a href="#${id}" ${r===id?'aria-current="page"':''}>${ic}<span>${l}</span></a>`).join('');
   const v = document.getElementById('view');
   v.innerHTML = r==='hoy' ? viewHoy() : r==='tareas' ? viewTasks() : viewHabits();
@@ -705,31 +543,6 @@ function viewWeek(){
   return head + rings + bar + `<div class="wlist">${rows}</div>` + spark;
 }
 
-/* Progreso mes a mes: % de hábitos cumplidos sobre los programados de cada mes. */
-function monthSeries(max){
-  const t = today(), cur = t.slice(0,7), first = earliest().slice(0,7), out = [];
-  let [y,m] = cur.split('-').map(Number);
-  for(let i=0; i<max; i++){
-    const ym = `${y}-${p2(m)}`; if(ym < first && out.length) break;
-    const mi = monthInfo(ym), end = mi.end < t ? mi.end : t;
-    out.unshift({ ym, pct: rangePct(mi.start, end), cur: ym === cur });
-    m--; if(!m){ m = 12; y--; }
-  }
-  return out;
-}
-function monthBars(sel){
-  const ms = monthSeries(12); if(!ms.length) return '';
-  const vals = ms.filter(x => x.pct != null), avg = vals.length ? Math.round(vals.reduce((a,x)=>a+x.pct,0)/vals.length) : null;
-  const best = vals.length ? vals.reduce((a,x) => x.pct > a.pct ? x : a) : null;
-  const prev = ms.length > 1 ? ms[ms.length-2].pct : null, now = ms[ms.length-1].pct;
-  const delta = (prev != null && now != null) ? now - prev : null;
-  const bars = ms.map(x => { const h = x.pct == null ? 0 : Math.max(3, x.pct); const on = x.ym === sel;
-    return `<button class="mbar${on?' on':''}${x.cur?' cur':''}" data-act="goto-month" data-ym="${x.ym}" aria-label="${esc(cap(monthName(x.ym)))}: ${x.pct==null?'sin datos':x.pct+'%'}" aria-pressed="${on}">
-      <em>${x.pct==null?'—':x.pct+(ms.length>7?'':'%')}</em><span class="col"><i style="height:${h}%"></i></span><span class="ml">${esc(monthName(x.ym).slice(0,3))}</span></button>`; }).join('');
-  return `<div class="mprog"><div class="mph"><h2 class="eyebrow">Progreso mes a mes</h2>${delta!=null?`<span class="dl ${delta>=0?'up':'down'}">${delta>=0?'+':''}${delta} pts vs ${esc(monthName(ms[ms.length-2].ym))}</span>`:''}</div>
-    <div class="mbars" style="--n:${ms.length}">${bars}</div>
-    ${vals.length>1?`<div class="mpk"><span>Promedio <b>${avg}%</b></span><span>Mejor mes <b>${esc(cap(monthName(best.ym)))} · ${best.pct}%</b></span></div>`:''}</div>`;
-}
 function viewMonth(){
   const mi = monthInfo(UI.month), t = today(), isCur = UI.month === t.slice(0,7), end = mi.end < t ? mi.end : t, first = earliest();
   const ts = dayStats(t), mo = mi.start <= t ? rangePct(mi.start, end) : null;
@@ -781,70 +594,53 @@ function viewMonth(){
   }).join('');
   return head + `<div class="mchart wrap"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hábitos completados por día">${chart}</svg></div>` + kpis +
     `<div class="wrap" style="padding-right:max(62px,env(safe-area-inset-right,0px))"><div class="mticks">${tickHtml}</div></div>${rows}
-    <div class="mleg wrap"><span><i style="background:#3447E6"></i>Cumplido</span><span><i style="background:#E4E6EC"></i>No cumplido</span><span><i style="width:3px;height:3px;border-radius:2px;background:#C9CBD3"></i>Libre</span><span>Toca un punto del gráfico para ver ese día</span></div>
-    <div class="wrap">${monthBars(UI.month)}</div>`;
+    <div class="mleg wrap"><span><i style="background:#3447E6"></i>Cumplido</span><span><i style="background:#E4E6EC"></i>No cumplido</span><span><i style="width:3px;height:3px;border-radius:2px;background:#C9CBD3"></i>Libre</span><span>Toca un punto del gráfico para ver ese día</span></div>`;
 }
 
 /* ----- Hoy ----- */
 function viewHoy(){
   const t = today(), s = dayStats(t), pct = s.total ? Math.round(s.n/s.total*100) : 0;
-  const blocked = D.tasks.filter(isBlocked).sort(sortTasks);
+  const nexts = D.tasks.filter(hasNext).sort(sortTasks);
   const head = `<div class="top wrap"><div class="toprow"><div><div class="eyebrow">Hoy · Semana ${isoWeek(t)}</div><h1 class="title" style="font-size:27px;letter-spacing:-.01em;margin-top:4px">${esc(longDate(t))}</h1></div><button class="icon44" data-act="settings" aria-label="Ajustes y respaldo">${I.gear}</button></div>${installHint()}</div>`;
-  if(!D.habits.length && !D.tasks.length) return head + `<div class="wrap empty"><h3>Bienvenido a Traky 🤘</h3><p>Una hoja para tus hábitos y una lista de tareas donde cada una dice qué necesitas para avanzar: su palanca.</p><div class="acts"><button class="btn btn-p" data-act="new-habit">Crear un hábito</button><button class="btn btn-g" data-act="new-task">Crear una tarea</button></div><button class="btn btn-t" data-act="sample">Probar con datos de ejemplo</button></div>`;
+  if(!D.habits.length && !D.tasks.length) return head + `<div class="wrap empty"><h3>Bienvenido a Traky 🤘</h3><p>Tus hábitos de cada día y tus cosas por hacer, cada una con su próximo paso.</p><div class="acts"><button class="btn btn-p" data-act="new-habit">Crear un hábito</button><button class="btn btn-g" data-act="new-task">Agregar algo por hacer</button></div><button class="btn btn-t" data-act="sample">Probar con datos de ejemplo</button></div>`;
   const habits = s.total ? `<div class="prog"><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="big">${s.n}<small> / ${s.total}</small></span><span style="font-size:13.5px;color:var(--muted)">Racha de <b style="color:var(--fg)">${currentStreak()} días</b></span></div><div class="bar"><i style="width:${pct}%"></i></div></div>
     <div class="hlist">${s.sched.map(h => { const on=(D.log[t]||[]).includes(h.id), st=habitStreak(h); return `<button class="hrow" data-act="htoggle" data-id="${h.id}" data-k="${t}" aria-pressed="${on}"><span class="ck">${I.x.replace('stroke-width="2.2"','stroke-width="2.4" stroke="#fff"')}</span><span class="tx"><b>${esc(h.name)}</b><span>${esc(h.cat||'')}${h.cat&&st>1?' · ':''}${st>1?'racha '+st:''}</span></span></button>`; }).join('')}</div>`
     : `<p style="color:var(--muted);margin:4px 0 0">${D.habits.length?'No tienes hábitos programados para hoy.':'Aún no tienes hábitos.'}</p>`;
-  const lev = blocked.length ? blocked.slice(0,6).map(tk => { const c=catOf(tk.cat), k=col(c); return `<button class="lvcard" data-act="edit-task" data-id="${tk.id}"><span class="from"><i style="background:${k.dot}"></i>${esc(c?c.name:'Sin categoría')} · ${esc(tk.title)}</span><span class="lv">${I.lever}<span>${esc(tk.palanca)}</span></span></button>`; }).join('')
-    : `<p style="color:var(--muted);margin:0">Nada te está frenando. Cuando una tarea necesite algo para avanzar, escríbelo como palanca.</p>`;
-  return head + `<div class="wrap">${habits}${D.habits.length?monthBars(null):''}<div class="blk"><h2><span>PALANCAS POR RESOLVER</span><span class="mono">${blocked.length||''}</span></h2>${lev}</div></div>`;
+  const lev = nexts.length ? `<div class="nxlist">${nexts.slice(0,5).map(tk => { const c=catOf(tk.cat), k=col(c); return `<button class="nxrow" data-act="edit-task" data-id="${tk.id}"><b><i>→</i><span>${esc(tk.palanca)}</span></b><span><em style="background:${k.dot}"></em>${esc(tk.title)}</span></button>`; }).join('')}</div>${nexts.length>5?`<a class="btn btn-t" href="#tareas" style="align-self:flex-start">Ver las ${nexts.length}</a>`:''}`
+    : `<p style="color:var(--muted);margin:0">Cuando anotes el próximo paso de algo por hacer, aparecerá aquí.</p>`;
+  return head + `<div class="wrap">${habits}<div class="blk"><h2><span>PRÓXIMOS PASOS</span><span class="mono">${nexts.length||''}</span></h2>${lev}</div></div>`;
 }
 
-/* ----- Tareas ----- */
+/* ----- Cosas por hacer ----- */
 function viewTasks(){
-  const f = UI.filter;
-  const head0 = `<div class="toprow"><h1 class="title">TAREAS</h1><button class="fab" data-act="new-task" aria-label="Nueva tarea">${I.plus}</button></div>`;
-  if(!D.tasks.length && !D.cats.length) return `<div class="top wrap">${head0}</div><div class="wrap empty" style="border-top:1px solid var(--line-2)"><h3>Organiza tus tareas por categoría</h3><p>Cada tarea tiene un ticket de box (qué hay que hacer) y una palanca: lo que te falta para poder ejecutarla.</p><div class="acts"><button class="btn btn-p" data-act="new-task">Crear primera tarea</button><button class="btn btn-t" data-act="sample">Ver con ejemplo</button></div></div>`;
-  const K = [['pend','Pendientes',t=>t.status==='pendiente'],['prog','En curso',t=>t.status==='progreso'],['block','Bloqueadas',isBlocked],['done','Hechas',t=>t.status==='completada']];
-  const match = f ? K.find(k=>k[0]===f)[2] : ()=>true;
-  const names = {pend:'pendientes',prog:'en curso',block:'bloqueadas',done:'hechas'};
-  let head = `<div class="top wrap">${head0}<div class="kgrid" role="group" aria-label="Filtrar por estado">${K.map(([id,l,fn]) => `<button class="kbtn${id==='block'?' blue':''}" data-act="filter" data-v="${id}" aria-pressed="${f===id}"><b>${D.tasks.filter(fn).length}</b><span>${l}</span></button>`).join('')}</div>
-    ${f?`<div class="fbar"><span>Mostrando <b>${names[f]}</b></span><button data-act="filter" data-v="">Ver todas</button></div>`:''}</div>`;
-  const cats = [...D.cats]; if(D.tasks.some(t=>!catOf(t.cat))) cats.push({id:'__none', name:'Sin categoría', color:'slate'});
+  const open = D.tasks.filter(t => t.status !== 'completada'), done = D.tasks.filter(t => t.status === 'completada');
+  const sub = D.tasks.length ? `<div class="tsub">${open.length} por hacer${done.length?` · ${done.length} ${done.length===1?'hecha':'hechas'}`:''}</div>` : '';
+  const head = `<div class="top wrap"><div class="toprow"><h1 class="title">COSAS POR HACER</h1><button class="fab" data-act="new-task" aria-label="Agregar algo por hacer">${I.plus}</button></div>${sub}${installHint()}</div>`;
+  if(!D.tasks.length && !D.cats.length) return head + `<div class="wrap empty"><h3>Nada por hacer todavía</h3><p>Anota algo que quieras hacer y su <b>próximo paso</b>: la acción concreta con la que avanzas.</p><div class="acts"><button class="btn btn-p" data-act="new-task">Agregar la primera</button><button class="btn btn-t" data-act="sample">Ver con ejemplo</button></div></div>`;
+  const cats = [...D.cats]; if(open.some(t => !catOf(t.cat))) cats.push({id:'__none', name:'Sin categoría', color:'slate'});
   let body = '';
   for(const c of cats){
-    const inCat = D.tasks.filter(t => c.id==='__none' ? !catOf(t.cat) : t.cat===c.id).sort(sortTasks);
-    const shown = inCat.filter(match);
-    if(f && !shown.length) continue;
-    const k = col(c), expanded = f ? true : isOpen(c.id);
-    const doneN = inCat.filter(t=>t.status==='completada').length;
-    body += `<section aria-label="${esc(c.name)}"><div class="cathead" style="background:${k.tint};border-color:${k.line}">
-      <button class="tog" data-act="fold" data-id="${c.id}" aria-expanded="${expanded}"><span class="dot" style="background:${k.dot}"></span><span class="nm" style="color:${k.ink}">${esc(c.name)}</span><span class="ct">${doneN}/${inCat.length}</span><span style="display:grid;transform:rotate(${expanded?0:-90}deg);transition:transform .2s">${I.chev}</span></button>
-      ${c.id!=='__none'?`<button class="icon44 more" data-act="edit-cat" data-id="${c.id}" aria-label="Editar ${esc(c.name)}">${I.more}</button>`:''}</div>`;
-    if(!expanded){
-      const open = inCat.filter(t=>t.status!=='completada'), top = open[0];
-      body += `<div class="deck" style="background:${k.tint};border-color:${k.line}"><button data-act="fold" data-id="${c.id}" aria-label="Abrir ${esc(c.name)}">
-        ${open.length>2?`<span class="l2" style="box-shadow:0 0 0 1px ${k.line}"></span>`:''}${open.length>1?`<span class="l1" style="box-shadow:0 0 0 1px ${k.line}"></span>`:''}
-        <span class="front" style="box-shadow:0 0 0 1px ${k.line},0 6px 16px -10px rgba(14,15,20,.25)">
-        ${top?`<span class="t1"><b>${esc(top.title)}</b><span class="mono" style="font-size:12px;color:${isLate(top)?'var(--danger)':'var(--muted)'};flex:none">${esc(dateLabel(top))}</span></span>
-        ${isBlocked(top)?`<span class="lvm">${I.lever}<span>${esc(top.palanca)}</span></span>`:''}
-        <span class="more" style="color:${k.ink}">${open.length>1?`+ ${open.length-1} ${open.length===2?'tarea más':'tareas más'}`:'Única tarea abierta'}</span>`
-        :`<span class="t1"><b style="color:var(--muted)">Todo listo en ${esc(c.name)}</b></span><span class="more" style="color:${k.ink}">${inCat.length?inCat.length+' hechas':'Sin tareas todavía'}</span>`}
-        </span></button></div>`;
-    } else {
-      body += shown.length ? shown.map(taskRow).join('') : `<div class="wrap" style="padding-block:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="color:var(--muted)">Sin tareas todavía.</span><button class="btn btn-t" data-act="new-task" data-cat="${c.id}">Agregar</button></div>`;
-    }
-    body += `</section>`;
+    const items = open.filter(t => c.id==='__none' ? !catOf(t.cat) : t.cat===c.id).sort(sortTasks);
+    const k = col(c), ex = isOpen(c.id);
+    body += `<section class="cgroup" aria-label="${esc(c.name)}"><div class="chd">
+      <button class="tog" data-act="fold" data-id="${c.id}" aria-expanded="${ex}"><span class="dot" style="background:${k.dot}"></span><span class="nm" style="color:${k.ink}">${esc(c.name)}</span><span class="ct">${items.length||''}</span><span style="display:grid;margin-left:auto;transform:rotate(${ex?0:-90}deg);transition:transform .2s">${I.chev}</span></button>
+      ${c.id!=='__none'?`<button class="icon44 more" data-act="edit-cat" data-id="${c.id}" aria-label="Editar categoría ${esc(c.name)}">${I.more}</button>`:''}</div>
+      ${ex ? (items.length ? items.map(taskRow).join('') : `<div class="cempty">Nada pendiente</div>`) : ''}</section>`;
   }
-  if(f && !body) body = `<div class="wrap empty"><h3>${f==='block'?'Nada te está frenando':'Sin tareas aquí'}</h3><p>${f==='block'?'Ninguna tarea abierta espera una palanca.':'Cuando haya tareas en este estado aparecerán en esta lista.'}</p></div>`;
-  return head + `<div class="tsheet">${body}</div>`;
+  let doneHtml = '';
+  if(done.length){
+    doneHtml = `<div class="wrap"><button class="donetog" data-act="showdone" aria-expanded="${UI.showDone}"><span style="display:grid;transform:rotate(${UI.showDone?0:-90}deg)">${I.chev}</span>${UI.showDone?'Ocultar':'Ver'} ${done.length} ${done.length===1?'hecha':'hechas'}</button></div>`;
+    if(UI.showDone) doneHtml += done.sort((a,b) => (b.doneAt||0)-(a.doneAt||0)).map(taskRow).join('');
+  }
+  return head + `<div class="tlist">${body}${doneHtml}</div>`;
 }
 function taskRow(t){
-  return `<div class="trow${t.status==='completada'?' done':''}">
-    <button class="st" data-act="cycle" data-id="${t.id}" aria-label="${esc(t.title)}. Estado: ${ST_LABEL[t.status]}. Tocar para avanzar">${ST_ICON[t.status]}</button>
+  const done = t.status === 'completada';
+  return `<div class="trow${done?' done':''}">
+    <button class="st" data-act="check" data-id="${t.id}" aria-label="${esc(t.title)}: ${done?'hecha. Tocar para reabrir':'marcar como hecha'}">${ST_ICON[t.status]}</button>
     <button class="op" data-act="edit-task" data-id="${t.id}">
-      <span class="l1"><b>${esc(t.title)}</b>${t.date?`<span class="dt${isLate(t)?' late':''}">${esc(dateLabel(t))}</span>`:''}</span>
-      ${t.desc?`<span class="ds">${esc(t.desc)}</span>`:''}
-      ${isBlocked(t)?`<span class="lvchip">${I.lever}<span><em>PALANCA</em>${esc(t.palanca)}</span></span>`:''}
+      <span class="l1"><b>${esc(t.title)}</b>${t.date&&!done?`<span class="dt${isLate(t)?' late':''}">${esc(shortDate(t.date))}</span>`:''}</span>
+      ${hasNext(t)?`<span class="nx"><i>→</i>${esc(t.palanca)}</span>`:''}
     </button></div>`;
 }
 
@@ -952,35 +748,33 @@ function habitSheet(h){
 function taskSheet(t, presetCat){
   const isNew = !t;
   t = t || {title:'', desc:'', palanca:'', palancaOk:false, status:'pendiente', date:'', cat: presetCat || (D.cats[0]||{}).id || ''};
-  let status = t.status, cat = t.cat, ok = !!t.palancaOk, newCatColor = COLOR_KEYS[D.cats.length % COLOR_KEYS.length];
+  let status = t.status, cat = t.cat, newCatColor = COLOR_KEYS[D.cats.length % COLOR_KEYS.length];
   const catChips = () => D.cats.map(c => `<button class="chip" data-c="${c.id}" aria-pressed="${c.id===cat}"><i style="background:${col(c).dot}"></i>${esc(c.name)}</button>`).join('') + `<button class="chip" data-c="__new" aria-pressed="${cat==='__new'}">+ Nueva</button>`;
-  const levBox = () => t.palanca ? `<div class="lvbox ${ok?'ok':'on'}" id="lvb"><div class="hd"><span class="tile">${I.lever}</span><span><b>${ok?'PALANCA RESUELTA':'PALANCA'}</b><span>Lo que necesitas para poder ejecutarla</span></span></div><p>${esc(t.palanca)}</p><button class="tg" data-lev>${ok?'Reabrir palanca':'Marcar como resuelta'}</button></div>` : '';
-  openSheet(`<div class="sb"><div class="shead"><h3>${isNew?'Nueva tarea':'Editar tarea'}</h3></div>
-    ${isNew?'':levBox()}
-    <div class="fld" data-f="title"><label for="tt">Título</label><input id="tt" type="text" maxlength="100" value="${esc(t.title)}" placeholder="Ej. Crear landing page" autocomplete="off" enterkeyhint="next"><span class="em">La tarea necesita un título.</span></div>
+  openSheet(`<div class="sb"><div class="shead"><h3>${isNew?'Agregar':'Editar'}</h3></div>
+    <div class="fld" data-f="title"><label for="tt">Qué hay que hacer</label><input id="tt" type="text" maxlength="100" value="${esc(t.title)}" placeholder="Ej. Crear landing page" autocomplete="off" enterkeyhint="next"><span class="em">Escribe qué hay que hacer.</span></div>
+    <div class="fld lev"><label for="tl"><span style="font-size:14px;letter-spacing:0">→</span>Próximo paso</label><textarea id="tl" rows="2" maxlength="200" placeholder="Ej. Definir el contenido y las referencias visuales.">${esc(t.palanca)}</textarea><span class="help">La acción concreta con la que avanzas. Cuando la hagas, escribe la siguiente.</span></div>
     <div class="fld" data-f="cat"><span class="lab">Categoría</span><div class="chips" id="tc">${catChips()}</div>
       <div id="tcnew" ${cat==='__new'||!D.cats.length?'':'hidden'} style="display:flex;flex-direction:column;gap:10px"><input id="tcn" type="text" maxlength="30" placeholder="Ej. Personal, Laboral, Casa" autocomplete="off"><div class="colors" id="tcc">${COLOR_KEYS.map(k=>`<button data-k="${k}" aria-pressed="${k===newCatColor}" aria-label="Color ${k}"><span style="background:${COLORS[k].dot}"></span></button>`).join('')}</div></div>
       <span class="em">Elige o crea una categoría.</span></div>
-    <div class="fld"><label for="td">Ticket de box</label><textarea id="td" rows="2" maxlength="300" placeholder="Qué hay que hacer y cuál es el resultado esperado.">${esc(t.desc)}</textarea></div>
-    <div class="fld lev"><label for="tl">${I.lever}Palanca</label><textarea id="tl" rows="2" maxlength="200" placeholder="Ej. Tener definido el contenido y las referencias visuales.">${esc(t.palanca)}</textarea><span class="help">El recurso, acción, información o condición que desbloquea la tarea.</span></div>
     <div class="fld"><span class="lab">Estado</span><div class="seg" style="grid-template-columns:repeat(3,1fr)" id="ts">${['pendiente','progreso','completada'].map(s=>`<button data-v="${s}" aria-pressed="${s===status}">${ST_LABEL[s]}</button>`).join('')}</div></div>
     <div class="fld"><label for="tdt">Fecha <span style="text-transform:none;letter-spacing:0;font-weight:400">· opcional</span></label><input id="tdt" type="date" value="${esc(t.date||'')}"></div>
-  </div><div class="sf">${isNew?'':`<button class="btn btn-d" data-del style="padding:0 16px">Eliminar</button>`}<button class="btn btn-p" data-save>${isNew?'Crear tarea':'Guardar'}</button></div>`, s => {
+    <div class="fld"><label for="td">Ticket de box <span style="text-transform:none;letter-spacing:0;font-weight:400">· opcional</span></label><textarea id="td" rows="2" maxlength="300" placeholder="Qué hay que hacer y cuál es el resultado esperado.">${esc(t.desc)}</textarea></div>
+  </div><div class="sf">${isNew?'':`<button class="btn btn-d" data-del style="padding:0 16px">Eliminar</button>`}<button class="btn btn-p" data-save>${isNew?'Agregar':'Guardar'}</button></div>`, s => {
     if(!D.cats.length) cat = '__new';
     const nb = s.querySelector('#tcnew');
     s.querySelector('#tc').onclick = e => { const b = e.target.closest('[data-c]'); if(!b) return; cat = b.dataset.c; s.querySelectorAll('#tc [data-c]').forEach(x=>x.setAttribute('aria-pressed', x===b)); nb.hidden = cat!=='__new'; if(cat==='__new') s.querySelector('#tcn').focus(); };
     s.querySelector('#tcc').onclick = e => { const b = e.target.closest('[data-k]'); if(!b) return; newCatColor = b.dataset.k; s.querySelectorAll('#tcc [data-k]').forEach(x=>x.setAttribute('aria-pressed', x===b)); };
     s.querySelector('#ts').onclick = e => { const b = e.target.closest('button'); if(!b) return; status = b.dataset.v; s.querySelectorAll('#ts button').forEach(x=>x.setAttribute('aria-pressed', x===b)); };
-    s.addEventListener('click', e => { if(e.target.closest('[data-lev]')){ ok = !ok; if(ok && status==='pendiente'){ status='progreso'; s.querySelectorAll('#ts button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v===status)); } const lb = s.querySelector('#lvb'); lb.outerHTML = levBox(); } });
     s.querySelector('[data-save]').onclick = () => {
       const title = s.querySelector('#tt').value.trim(); const ncn = s.querySelector('#tcn').value.trim();
       const e1 = fieldErr(s,'title',!title), e2 = fieldErr(s,'cat', (cat==='__new' && !ncn) || (!cat)); if(e1||e2) return;
       let cid = cat;
       if(cat==='__new'){ const ex = D.cats.find(c=>c.name.toLowerCase()===ncn.toLowerCase()); if(ex) cid = ex.id; else { cid = uid('c'); D.cats.push({id:cid, name:ncn, color:newCatColor}); } }
       const palanca = s.querySelector('#tl').value.trim();
-      const data = {title, cat:cid, desc:s.querySelector('#td').value.trim(), palanca, palancaOk: palanca ? (palanca===t.palanca ? ok : false) : false, status, date:s.querySelector('#tdt').value || ''};
+      const data = {title, cat:cid, desc:s.querySelector('#td').value.trim(), palanca, palancaOk:false, status, date:s.querySelector('#tdt').value || ''};
+      if(status==='completada' && t.status!=='completada') data.doneAt = Date.now();
       if(isNew) D.tasks.push(Object.assign({id:uid('t'), createdAt:Date.now()}, data)); else Object.assign(D.tasks.find(x=>x.id===t.id), data);
-      closeSheet(); commit(); toast(isNew?'Tarea creada':'Tarea guardada');
+      closeSheet(); commit(); toast(isNew?'Agregada':'Guardado');
     };
     const del = s.querySelector('[data-del]');
     if(del) del.onclick = () => { const idx = D.tasks.findIndex(x=>x.id===t.id), snap = D.tasks[idx]; D.tasks.splice(idx,1); closeSheet(); commit(); toast('Tarea eliminada', () => { D.tasks.splice(idx,0,snap); commit(); }); };
@@ -1004,15 +798,8 @@ function catSheet(c){
 
 /* ----- settings / backup ----- */
 function settingsSheet(){
-  const acct = USER
-    ? `<div class="setrow"><span class="eyebrow">Cuenta</span><div class="acct"><span class="av" aria-hidden="true">${esc((USER.name||USER.email||'?').trim().charAt(0).toUpperCase())}</span><div><b>${esc(USER.name || USER.email)}</b>${USER.name?`<span>${esc(USER.email)}</span>`:''}</div></div>
-      <div class="sync" data-sync data-state="${Sync.state}"><i></i><span>${Sync.label()}</span></div>
-      <div class="acts"><button class="btn btn-g" data-out>Cerrar sesión</button></div></div>`
-    : `<div class="setrow"><span class="eyebrow">Cuenta</span><p>Estás usando Traky solo en este teléfono. Entra con Google para guardar tus datos en tu cuenta y verlos en cualquier dispositivo. Lo que tienes ahora se sube al entrar.</p>
-      <div class="acts"><button class="btn btn-p" data-in>Entrar con Google</button></div></div>`;
   openSheet(`<div class="sb"><div class="shead"><h3>Ajustes</h3></div>
-    ${acct}
-    <div class="setrow"><span class="eyebrow">Respaldo</span><p>${USER?'Tus datos se guardan en tu cuenta. Igual puedes exportar un archivo de respaldo cuando quieras.':'Tus datos viven en este teléfono. Exporta un archivo de respaldo de vez en cuando; con él puedes recuperar todo o pasarlo a otro dispositivo.'}</p>
+    <div class="setrow"><span class="eyebrow">Respaldo</span><p>Tus datos viven en este teléfono. Exporta un archivo de respaldo de vez en cuando; con él puedes recuperar todo o pasarlo a otro dispositivo.</p>
       <div class="acts"><button class="btn btn-g" data-exp>Exportar respaldo</button><label class="btn btn-g" for="imp">Importar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div></div>
     ${D.habits.some(h=>h.archivedAt)?`<div class="setrow"><span class="eyebrow">Hábitos archivados</span><p>No aparecen en los días nuevos, pero su historial sigue en tus meses anteriores.</p>
       <div>${D.habits.filter(h=>h.archivedAt).map(h=>`<div class="arow"><div><b>${esc(h.name)}</b><span>Archivado el ${esc(shortDate(h.archivedAt))} · ${marksOf(h.id)} marcas</span></div><button style="background:var(--sunken);color:var(--accent)" data-restore="${h.id}">Reactivar</button><button style="background:#FDECEA;color:var(--danger)" data-purge="${h.id}">Eliminar</button></div>`).join('')}</div></div>`:''}
@@ -1022,12 +809,10 @@ function settingsSheet(){
   </div><div class="sf"><button class="btn btn-p" data-close>Listo</button></div>`, s => {
     s.querySelector('[data-close]').onclick = () => closeSheet();
     s.querySelector('[data-exp]').onclick = exportData;
-    const out = s.querySelector('[data-out]'); if(out) out.onclick = signOut;
-    const inb = s.querySelector('[data-in]'); if(inb) inb.onclick = () => { ls.del('traky.mode'); signIn(); };
     s.querySelectorAll('[data-restore]').forEach(b => b.onclick = () => { restoreHabit(D.habits.find(h=>h.id===b.dataset.restore)); closeSheet(); commit(); toast('Hábito reactivado'); });
     s.querySelectorAll('[data-purge]').forEach(b => b.onclick = () => { const h = D.habits.find(x=>x.id===b.dataset.purge), n = marksOf(h.id); confirmSheet('Eliminar definitivamente', `Se borrará <b>${esc(h.name)}</b> y sus <b>${n}</b> ${n===1?'marca':'marcas'} de todos los meses. Esto no se puede deshacer.`, 'Eliminar para siempre', () => { purgeHabit(h.id); commit(); toast('Hábito eliminado para siempre'); }); });
     s.querySelector('#imp').onchange = e => { const f = e.target.files[0]; if(f) importData(f); };
-    s.querySelector('[data-wipe]').onclick = () => confirmSheet('Borrar todos los datos', (USER?'Se eliminarán tus hábitos, historial, tareas y categorías de tu cuenta y de este teléfono.':'Se eliminarán tus hábitos, historial, tareas y categorías de este teléfono.')+' Exporta un respaldo antes si quieres conservarlos.', 'Borrar todo', () => { D = fresh(); commit(); toast('Datos borrados'); });
+    s.querySelector('[data-wipe]').onclick = () => confirmSheet('Borrar todos los datos', 'Se eliminarán tus hábitos, historial, tareas y categorías de este teléfono. Exporta un respaldo antes si quieres conservarlos.', 'Borrar todo', () => { D = fresh(); commit(); toast('Datos borrados'); });
   });
 }
 async function exportData(){
@@ -1043,7 +828,7 @@ function importData(file){
   const r = new FileReader();
   r.onload = () => {
     try{ const d = JSON.parse(r.result); if(!d || !Array.isArray(d.habits) || !Array.isArray(d.tasks)) throw 0;
-      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que tienes ahora${USER?' en tu cuenta':' en este teléfono'}.`, 'Importar', () => { D = migrate(Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})})); commit(); toast('Respaldo importado'); });
+      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que hay ahora en este teléfono.`, 'Importar', () => { D = migrate(Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})})); commit(); toast('Respaldo importado'); });
     }catch(e){ toast('Ese archivo no es un respaldo de Traky'); }
   };
   r.readAsText(file);
@@ -1059,12 +844,12 @@ function loadSample(){
   D.log[t] = [ids[0], ids[4]];
   const C = [['Personal','teal'],['Laboral','amber'],['Casa','rose']].map(([name,color]) => { const id = uid('c'); D.cats.push({id,name,color}); return id; });
   const T = [
-    [0,'Crear landing page','Diseñar y publicar la primera versión.','Tener definido el contenido y las referencias visuales.','progreso',addDays(t,6)],
-    [0,'Elegir dominio','Comprarlo y apuntarlo al hosting.','Decidir el nombre definitivo.','pendiente',addDays(t,3)],
+    [0,'Crear landing page','Diseñar y publicar la primera versión.','Definir el contenido y las referencias visuales.','progreso',addDays(t,6)],
+    [0,'Elegir dominio','Comprarlo y apuntarlo al hosting.','Elegir entre los 3 nombres finalistas.','pendiente',addDays(t,3)],
     [0,'Escribir manifiesto','Una página que explique por qué existe.','','completada',''],
-    [1,'Propuesta para cliente','Alcance, plazos y valor; enviar el viernes.','Recibir el brief final del cliente.','pendiente',addDays(t,4)],
-    [1,'Reporte mensual de campañas','Resultados del mes con recomendaciones.','','progreso',addDays(t,-1)],
-    [2,'Reparar llave del baño','Cambiar el cartucho para que no gotee.','Comprar el repuesto correcto.','pendiente','']
+    [1,'Propuesta para cliente','Alcance, plazos y valor; enviar el viernes.','Pedir el brief final por correo.','pendiente',addDays(t,4)],
+    [1,'Reporte mensual de campañas','Resultados del mes con recomendaciones.','Exportar los datos de octubre.','progreso',addDays(t,-1)],
+    [2,'Reparar llave del baño','Cambiar el cartucho para que no gotee.','Medir el cartucho y comprar el repuesto.','pendiente','']
   ];
   T.forEach(([c,title,desc,palanca,status,date]) => D.tasks.push({id:uid('t'), cat:C[c], title, desc, palanca, palancaOk:false, status, date, createdAt:Date.now()}));
   D.meta.mantra[t.slice(0,7)] = D.meta.mantra[t.slice(0,7)] || 'Ser intencional';
@@ -1097,12 +882,11 @@ document.addEventListener('click', e => {
     case 'edit-habit': habitSheet(D.habits.find(h=>h.id===id)); break;
     case 'new-task': taskSheet(null, a.dataset.cat); break;
     case 'edit-task': taskSheet(D.tasks.find(t=>t.id===id)); break;
-    case 'cycle': { const t = D.tasks.find(x=>x.id===id), prev = t.status; t.status = ST_NEXT[t.status]; commit(); if(t.status==='completada') toast('Tarea completada', () => { t.status = prev; commit(); }); break; }
-    case 'filter': UI.filter = a.dataset.v ? (UI.filter===a.dataset.v ? null : a.dataset.v) : null; render(); break;
+    case 'check': { const t = D.tasks.find(x=>x.id===id), prev = t.status; if(prev==='completada'){ t.status = 'pendiente'; delete t.doneAt; commit(); break; } t.status = 'completada'; t.doneAt = Date.now(); commit(); toast('Hecha 🤘', () => { t.status = prev; delete t.doneAt; commit(); }); break; }
+    case 'showdone': UI.showDone = !UI.showDone; render(); break;
     case 'fold': D.meta.open[id] = !isOpen(id); commit(); break;
     case 'edit-cat': catSheet(D.cats.find(c=>c.id===id)); break;
     case 'settings': settingsSheet(); break;
-    case 'goto-month': UI.month = a.dataset.ym; { const ms = monthInfo(UI.month); UI.sel = ms.end < today() ? ms.end : today(); } UI.hview = 'month'; if(route()!=='habitos') location.hash = 'habitos'; else { render(); window.scrollTo(0,0); } break;
     case 'sample': loadSample(); break;
     case 'hide-hint': try{ localStorage.setItem('traky.hint','1'); }catch(e){} render(); break;
   }
@@ -1117,33 +901,7 @@ document.addEventListener('visibilitychange', () => { if(!document.hidden && las
 let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(render, 120); });
 
 /* ---------- boot ---------- */
-async function boot(){
-  document.body.classList.add('auth');
-  document.getElementById('view').innerHTML = '<div class="login wrap"><div class="lg-mark" aria-hidden="true">🤘</div></div>';
-  if(!sb){ useLocal(); return; }
-  const back = /access_token=|error_description=/.test(location.hash);
-  let session = null;
-  try{ const r = await sb.auth.getSession(); session = r.data && r.data.session; }catch(e){}
-  if(/error_description=/.test(location.hash)) setTimeout(() => toast('No se pudo entrar con Google. Intenta de nuevo.'), 300);
-  if(back) history.replaceState(null, '', location.pathname + '#habitos');
-  if(session){ await enterUser(session.user); openApp(); }
-  else {
-    const last = (() => { try{ return JSON.parse(ls.get('traky.lastUser')); }catch(e){ return null; } })();
-    if(last && last.id && readLocal(LOCAL_KEY + '.' + last.id) && !navigator.onLine){
-      // Sin conexión: abre la copia del teléfono y sincroniza al volver la señal.
-      USER = last; KEY = LOCAL_KEY + '.' + last.id; D = migrate(Store.load()); Sync.state = 'error'; openApp();
-    }
-    else if(ls.get('traky.mode') === 'local'){ useLocal(); }
-    else showLogin();
-  }
-  sb.auth.onAuthStateChange((ev, s) => {
-    if(ev === 'SIGNED_IN' && s && (!USER || USER.id !== s.user.id) && document.body.classList.contains('auth')) enterUser(s.user).then(openApp);
-  });
-}
-const resync = () => { if(USER && !document.hidden) Sync.pull(); };
-document.addEventListener('visibilitychange', resync);
-window.addEventListener('online', async () => { if(!USER) return; try{ await sb.auth.getSession(); }catch(e){} Sync.pull(); });
-boot();
+render();
 if('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
