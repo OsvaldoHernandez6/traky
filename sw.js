@@ -1,6 +1,6 @@
 /* Traky · service worker: funciona sin conexión.
    Sube VERSION cada vez que publiques cambios. */
-const VERSION = 'traky-v1';
+const VERSION = 'traky-v3';
 const SHELL = [
   './',
   './index.html',

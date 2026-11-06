@@ -98,6 +98,66 @@ button.gc:active{background:var(--accent-soft)}
 .gfoot svg{stroke:var(--accent)}
 .gfoot span{display:inline-flex;align-items:center;gap:6px}
 
+/* habits v3: Semana | Mes */
+.hseg{display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:11px;background:var(--sunken)}
+.hseg button{height:38px;border-radius:9px;font-size:14.5px;font-weight:500;color:var(--muted)}
+.hseg button[aria-selected="true"]{background:#fff;color:var(--fg);box-shadow:0 1px 3px rgba(14,15,20,.12)}
+.wtitle{display:flex;align-items:center;gap:2px;margin-left:-12px;min-width:0}
+.wtitle .tx{display:flex;flex-direction:column;gap:2px;min-width:0;padding:0 2px}
+.wtitle h1{font-size:25px;font-weight:700;letter-spacing:-.01em;line-height:1.1;white-space:nowrap}
+.rings{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:12px max(10px,env(safe-area-inset-left,0px)) 4px max(10px,env(safe-area-inset-right,0px))}
+.ring{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0 8px;border-radius:14px}
+.ring[aria-pressed="true"]{background:var(--sunken)}
+.ring:disabled{cursor:default}
+.ring .l{font-size:11px;font-weight:600;color:var(--muted)}
+.ring.today .l{color:var(--accent)}
+.ring svg circle.p{transition:stroke-dasharray .35s}
+.selbar{padding-block:8px 14px;display:flex;flex-direction:column;gap:8px}
+.selbar .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.selbar .r1 b{font-size:16.5px;font-weight:600}
+.selbar .r1 span{font-family:var(--mono);font-size:15px;font-weight:500}
+.selbar .r1 span small{font-size:15px;color:var(--muted)}
+.wlist{border-top:1px solid var(--line)}
+.wrow{display:flex;align-items:center;gap:10px;min-height:68px;border-bottom:1px solid var(--line);padding-left:max(11px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.wck{width:44px;height:44px;display:grid;place-items:center;flex:none}
+.wck span{width:30px;height:30px;border-radius:9px;box-shadow:inset 0 0 0 1.6px #C9CBD3;display:grid;place-items:center;transition:background .15s}
+.wck span svg{stroke:#fff;opacity:0}
+.wck[aria-pressed="true"] span{background:var(--accent);box-shadow:none}
+.wck[aria-pressed="true"] span svg{opacity:1}
+.wck.pop span{animation:pop .22s ease-out}
+.wfree{width:44px;height:44px;display:grid;place-items:center;flex:none;font-size:11.5px;color:#6F727E}
+.wname{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:left;min-height:56px;justify-content:center}
+.wname b{font-size:16px;font-weight:500;overflow-wrap:anywhere}
+.wname span{font-size:12.5px;color:var(--muted)}
+.wrow.off .wname b{color:#6F727E}
+.wdots{display:flex;gap:4px;flex:none}
+.wdots i{width:12px;height:22px;display:grid;place-items:center}
+.wdots i::before{content:"";width:10px;height:18px;border-radius:4px;box-shadow:inset 0 0 0 1.2px #C9CBD3;background:#fff}
+.wdots i.y::before{background:var(--accent);box-shadow:none}
+.wdots i.f::before{box-shadow:inset 0 0 0 1px var(--line);background:transparent}
+.wdots i.o::before{width:4px;height:4px;border-radius:2px;background:var(--line-2);box-shadow:none}
+.wdots i.s::before{outline:1.5px solid var(--fg);outline-offset:1.5px}
+.spark{display:flex;flex-direction:column;gap:8px;width:100%;padding-block:16px 4px;text-align:left}
+.spark .r1{display:flex;justify-content:space-between;align-items:baseline;width:100%}
+.spark .r1 b{color:var(--accent);font-size:13.5px;font-weight:600}
+.mchart{padding-block:12px 2px}
+.mchart svg text{font-family:var(--mono)}
+.mchart .hit{fill:transparent;cursor:pointer}
+.mkpis{padding-block:6px 14px;border-bottom:1px solid var(--line-2)}
+.mticks{position:relative;height:22px;margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.mticks span{position:absolute;top:5px;transform:translateX(-50%)}
+.mticks span.t{color:var(--accent);font-weight:600}
+.mrow{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
+.mrow .mb{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;padding:11px 0 13px max(18px,env(safe-area-inset-left,0px));text-align:left}
+.mrow .r1{display:flex;align-items:baseline;justify-content:space-between;gap:10px;width:100%}
+.mrow .r1 b{font-size:15.5px;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.mrow .r1 span{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none}
+.mrow .r1 em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--accent);margin-right:6px;font-family:var(--sans)}
+.mrow .ed{width:44px;flex:none;display:grid;place-items:center;color:var(--muted);margin-right:max(2px,env(safe-area-inset-right,0px))}
+.mleg{display:flex;gap:6px 14px;flex-wrap:wrap;padding-block:12px;font-size:12.5px;color:var(--muted);align-items:center}
+.mleg span{display:inline-flex;align-items:center;gap:6px}
+.mleg i{width:9px;height:14px;border-radius:3px;display:block}
+
 /* empty */
 .empty{padding-block:28px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .empty h3{font-size:18px;font-weight:600}
@@ -235,6 +295,17 @@ button.gc:active{background:var(--accent-soft)}
 .lvbox .tg{height:46px;border-radius:12px;font-size:15px;font-weight:600}
 .lvbox.on .tg{background:var(--accent);color:#fff}
 .lvbox.ok .tg{background:#fff;color:var(--fg-2);box-shadow:inset 0 0 0 1px var(--line-2)}
+.zone{display:flex;flex-direction:column;border-top:1px solid var(--line);margin-top:4px}
+.zrow{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.zrow>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.zrow b{font-size:15.5px;font-weight:600}
+.zrow span{font-size:13px;color:var(--muted);line-height:1.4}
+.zrow .btn{height:42px;padding:0 14px;font-size:15px;flex:none}
+.arow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.arow>div{flex:1;min-width:0;display:flex;flex-direction:column}
+.arow b{font-size:15.5px;font-weight:500}
+.arow span{font-size:12.5px;color:var(--muted)}
+.arow button{height:38px;padding:0 12px;border-radius:10px;font-size:14px;font-weight:600}
 .confirm p{margin:0;font-size:15.5px;color:var(--fg-2);line-height:1.45}
 .setrow{display:flex;flex-direction:column;gap:6px}
 .setrow p{margin:0;font-size:14px;color:var(--muted);line-height:1.45}
@@ -267,7 +338,15 @@ const Store = {
   load(){ try{ const r = localStorage.getItem(KEY); if(r){ const d = JSON.parse(r); return Object.assign(fresh(), d, { meta: Object.assign(fresh().meta, d.meta||{}) }); } }catch(e){} return fresh(); },
   save(d){ try{ localStorage.setItem(KEY, JSON.stringify(d)); return true; }catch(e){ return false; } }
 };
-let D = Store.load();
+function migrate(d){
+  for(const h of d.habits){
+    if(!Array.isArray(h.sched)) h.sched = [{from: h.createdAt || dkeyNow(), freq: h.freq || 'daily', days: h.days || []}];
+    if(!Array.isArray(h.pauses)) h.pauses = [];
+  }
+  return d;
+}
+function dkeyNow(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+let D = migrate(Store.load());
 function commit(){ if(!Store.save(D)) toast('No se pudo guardar en el teléfono'); render(); }
 try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
 
@@ -325,10 +404,32 @@ const col = c => COLORS[(c && c.color) || 'slate'] || COLORS.slate;
 
 /* ---------- habits domain ---------- */
 const activeHabits = () => D.habits.filter(h => !h.archivedAt);
+/* El historial no se reescribe: cada cambio de frecuencia se guarda con su fecha
+   (h.sched) y las pausas por archivo (h.pauses) siguen contando como "no programado". */
+function ruleOn(h, k){ const s = h.sched || []; let r = s[0]; for(const x of s) if(x.from <= k) r = x; return r || {freq:h.freq, days:h.days||[]}; }
 function scheduledOn(h, k){
   if(h.createdAt && k < h.createdAt) return false;
   if(h.archivedAt && k >= h.archivedAt) return false;
-  return h.freq === 'daily' || (h.days||[]).includes(dow(k));
+  if((h.pauses||[]).some(p => k >= p.from && k < p.to)) return false;
+  const r = ruleOn(h, k);
+  return r.freq === 'daily' || (r.days||[]).includes(dow(k));
+}
+function setSchedule(h, freq, days){
+  const t = today(), cur = ruleOn(h, t);
+  const same = cur.freq === freq && (freq === 'daily' || [...cur.days].sort().join() === [...days].sort().join());
+  h.freq = freq; h.days = days;
+  if(same) return;
+  h.sched = (h.sched || []).filter(x => x.from !== t);
+  if(h.createdAt === t) h.sched = [];
+  h.sched.push({from: t, freq, days});
+  h.sched.sort((a,b) => a.from < b.from ? -1 : 1);
+}
+const marksOf = id => Object.values(D.log).reduce((n,v) => n + (v.includes(id)?1:0), 0);
+function archiveHabit(h){ h.archivedAt = today(); }
+function restoreHabit(h){ if(h.archivedAt){ if(h.archivedAt < today()) h.pauses = (h.pauses||[]).concat([{from:h.archivedAt, to:today()}]); h.archivedAt = null; } }
+function purgeHabit(id){
+  D.habits = D.habits.filter(x => x.id !== id);
+  for(const k in D.log){ D.log[k] = D.log[k].filter(i => i !== id); if(!D.log[k].length) delete D.log[k]; }
 }
 function dayStats(k){
   const sched = D.habits.filter(h => scheduledOn(h, k)), log = D.log[k] || [];
@@ -373,7 +474,9 @@ const sortTasks = (a,b) => (RANK[a.status]-RANK[b.status]) || ((isBlocked(b)?1:0
 const dateLabel = t => !t.date ? '' : shortDate(t.date) + (isLate(t) ? ' · vencida' : '');
 
 /* ---------- UI state + routing ---------- */
-const UI = { month: today().slice(0,7), filter: null };
+const UI = { month: today().slice(0,7), filter: null, hview: 'week', sel: today() };
+const weekStart = k => { let x = k; while(dow(x) !== 1) x = addDays(x, -1); return x; };
+const activeOn = (h, k) => (!h.createdAt || h.createdAt <= k) && (!h.archivedAt || h.archivedAt > k);
 const ROUTES = ['hoy','habitos','tareas'];
 const route = () => { const h = location.hash.slice(1); return ROUTES.includes(h) ? h : 'habitos'; };
 window.addEventListener('hashchange', () => { render(); window.scrollTo(0,0); });
@@ -386,10 +489,7 @@ function render(){
   const tabs = [['hoy','Hoy',I.tHoy],['habitos','Hábitos',I.tHab],['tareas','Tareas',I.tTar]];
   document.getElementById('tabbar').innerHTML = tabs.map(([id,l,ic]) => `<a href="#${id}" ${r===id?'aria-current="page"':''}>${ic}<span>${l}</span></a>`).join('');
   const v = document.getElementById('view');
-  const gw = v.querySelector('.gwrap'); const sx = gw ? gw.scrollLeft : 0;
   v.innerHTML = r==='hoy' ? viewHoy() : r==='tareas' ? viewTasks() : viewHabits();
-  const gw2 = v.querySelector('.gwrap'); if(gw2) gw2.scrollLeft = sx;
-  drawChart();
 }
 
 function installHint(){
@@ -400,59 +500,113 @@ function installHint(){
   return `<div class="install"><span>Instala Traky: toca <b>Compartir</b> y luego <b>Agregar a inicio</b>. Se abrirá como app y funcionará sin conexión.</span><button data-act="hide-hint" aria-label="Ocultar">Ocultar</button></div>`;
 }
 
-/* ----- Hábitos: una sola hoja ----- */
+/* ----- Hábitos: Semana | Mes ----- */
+const XW = '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3.6 3.9 12.3 12.4M12.6 3.4 3.5 12.2"/></svg>';
+const viewW = () => Math.max(280, Math.min(560, (document.getElementById('view').clientWidth || window.innerWidth)) - 36);
+function hSeg(){ const w = UI.hview === 'week'; return `<div class="hseg" role="tablist" aria-label="Vista"><button role="tab" aria-selected="${w}" data-act="hview" data-v="week">Semana</button><button role="tab" aria-selected="${!w}" data-act="hview" data-v="month">Mes</button></div>`; }
 function viewHabits(){
-  const mi = monthInfo(UI.month), t = today(), isCur = UI.month === t.slice(0,7);
-  const ts = dayStats(t); const endK = mi.end < t ? mi.end : t;
-  const mo = mi.start <= t ? rangePct(mi.start, endK) : null;
+  if(UI.sel > today()) UI.sel = today();
+  if(!D.habits.length){
+    return `<div class="top wrap"><div class="toprow"><h1 class="title">HÁBITOS</h1><button class="fab" data-act="new-habit" aria-label="Nuevo hábito">${I.plus}</button></div>${installHint()}</div>
+    <div class="wrap empty" style="border-top:1px solid var(--line-2)"><h3>Empieza con un hábito</h3><p>Márcalo cada día con un toque. En <b>Semana</b> ves cómo vas estos 7 días; en <b>Mes</b>, el patrón completo de cada hábito y tu línea de progreso.</p><div class="acts"><button class="btn btn-p" data-act="new-habit">Crear primer hábito</button><button class="btn btn-t" data-act="sample">Ver con ejemplo</button></div></div>`;
+  }
+  return UI.hview === 'month' ? viewMonth() : viewWeek();
+}
+
+function viewWeek(){
+  const t = today(), sel = UI.sel, ws = weekStart(sel), curWeek = ws === weekStart(t);
+  const days = Array.from({length:7}, (_,i) => addDays(ws, i));
+  const C = 2*Math.PI*15;
+  const eyebrow = `${esc(monthName(sel.slice(0,7)).toUpperCase())} · SEMANA ${isoWeek(sel)}`;
+  const title = curWeek ? 'Esta semana' : `Semana del ${esc(shortDate(ws))}`;
+  const head = `<div class="top wrap"><div class="toprow"><div class="wtitle">
+      <button class="icon44" data-act="week" data-n="-7" aria-label="Semana anterior">${I.left}</button>
+      <div class="tx"><span class="eyebrow">${eyebrow}</span><h1>${title}</h1></div>
+      <button class="icon44" data-act="week" data-n="7" aria-label="Semana siguiente" ${curWeek?'disabled':''}>${I.right}</button></div>
+      <button class="fab" data-act="new-habit" aria-label="Nuevo hábito">${I.plus}</button></div>${hSeg()}${installHint()}</div>`;
+  const rings = `<div class="rings" role="group" aria-label="Días de la semana">${days.map(k => {
+    const s = dayStats(k), fut = k > t, frac = s.total ? s.n/s.total : 0;
+    return `<button class="ring${k===t?' today':''}" data-act="wday" data-k="${k}" aria-pressed="${k===sel}" ${fut?'disabled':''} aria-label="${esc(longDate(k))}${fut?'':`, ${s.n} de ${s.total}`}">
+      <span class="l">${L[dow(k)]}</span>
+      <svg width="40" height="40" viewBox="0 0 38 38" aria-hidden="true"><circle cx="19" cy="19" r="15" fill="none" stroke="#ECEDF1" stroke-width="4"/>${fut||!s.total?'':`<circle class="p" cx="19" cy="19" r="15" fill="none" stroke="#3447E6" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(frac*C).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 19 19)"/>`}
+      <text x="19" y="23.5" text-anchor="middle" font-family="ui-monospace,SF Mono,Menlo,monospace" font-size="12" font-weight="500" fill="${fut?'#A4A7B2':k===t?'#3447E6':'#16171C'}">${+k.slice(8)}</text></svg></button>`; }).join('')}</div>`;
+  const s = dayStats(sel), pct = s.total ? Math.round(s.n/s.total*100) : 0;
+  const selName = (sel===t ? 'Hoy, ' : '') + fmt(sel,{weekday:'long', day:'numeric'});
+  const bar = `<div class="selbar wrap"><div class="r1"><b>${esc(cap(selName))}</b><span>${s.n}<small> / ${s.total}</small></span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  const hs = D.habits.filter(h => activeOn(h, sel));
+  const log = D.log[sel] || [];
+  const rows = hs.length ? hs.map(h => {
+    const sch = scheduledOn(h, sel), done = log.includes(h.id), st = habitStreak(h);
+    const dots = days.map(k => { const cls = !scheduledOn(h,k) ? 'o' : k > t ? 'f' : (D.log[k]||[]).includes(h.id) ? 'y' : ''; return `<i class="${cls}${k===sel?' s':''}"></i>`; }).join('');
+    return `<div class="wrow${sch?'':' off'}">${sch?`<button class="wck" data-act="wtoggle" data-id="${h.id}" aria-pressed="${done}" aria-label="${esc(h.name)}"><span>${XW}</span></button>`:`<span class="wfree">libre</span>`}
+      <button class="wname" data-act="edit-habit" data-id="${h.id}" aria-label="Editar ${esc(h.name)}"><b>${esc(h.name)}</b><span>${esc(h.cat||'')}${h.cat&&st>1?' · ':''}${st>1?'racha '+st:''}</span></button>
+      <span class="wdots" aria-hidden="true">${dots}</span></div>`;
+  }).join('') : `<div class="wrap" style="padding-block:20px;color:var(--muted)">No había hábitos activos este día.</div>`;
+  // sparkline del mes del día elegido
+  const ym = sel.slice(0,7), mi = monthInfo(ym), W = viewW(), end = mi.end < t ? mi.end : t, first = earliest();
+  const st = mi.days.map(k => dayStats(k));
+  const maxY = Math.max(1, ...st.map(x => x.total));
+  const SX = i => 2 + i/(mi.n-1)*(W-4), SY = v => 50 - v/maxY*44;
+  const pts = []; st.forEach((x,i) => { if(x.k <= end && x.k >= first) pts.push([SX(i), SY(x.n), x.k]); });
+  const line = pts.map((p,i) => (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const mo = mi.start <= t ? rangePct(mi.start, end) : null;
+  const spark = pts.length ? `<button class="spark wrap" data-act="hview" data-v="month" aria-label="Ver el mes completo"><span class="r1"><span class="eyebrow">${esc(monthName(ym).toUpperCase())}${mo==null?'':' · '+mo+'%'}</span><b>Ver mes →</b></span>
+    <svg width="${W}" height="56" viewBox="0 0 ${W} 56" aria-hidden="true"><line x1="0" x2="${W}" y1="54" y2="54" stroke="#ECEDF1"/>${pts.length>1?`<path d="${line} L${pts[pts.length-1][0].toFixed(1)} 54 L${pts[0][0].toFixed(1)} 54 Z" fill="#3447E6" opacity=".08"/><path d="${line}" fill="none" stroke="#3447E6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>`:''}${(() => { const q = pts.find(p => p[2]===sel) || pts[pts.length-1]; return `<circle cx="${q[0]}" cy="${q[1]}" r="3.6" fill="#3447E6"/>`; })()}</svg></button>` : '';
+  return head + rings + bar + `<div class="wlist">${rows}</div>` + spark;
+}
+
+function viewMonth(){
+  const mi = monthInfo(UI.month), t = today(), isCur = UI.month === t.slice(0,7), end = mi.end < t ? mi.end : t, first = earliest();
+  const ts = dayStats(t), mo = mi.start <= t ? rangePct(mi.start, end) : null;
   const mantra = (D.meta.mantra||{})[UI.month] || '';
-  const kpis = D.habits.length ? `<div class="kpis">${isCur?`<div><b>${ts.n}/${ts.total}</b><span>Hoy</span></div><div><b>${currentStreak()}</b><span>Racha</span></div>`:''}<div><b>${bestStreak()}</b><span>Mejor racha</span></div><div><b>${mo==null?'—':mo+'%'}</b><span>${isCur?'Este mes':'Del mes'}</span></div></div>` : '';
-  const head = `<div class="top wrap">
-    <div class="toprow"><div class="mnav">
+  const head = `<div class="top wrap"><div class="toprow"><div class="mnav">
       <button class="icon44" data-act="month" data-n="-1" aria-label="Mes anterior">${I.left}</button>
       <h1 class="title">${esc(monthName(UI.month).toUpperCase())} ${mi.y}</h1>
       <button class="icon44" data-act="month" data-n="1" aria-label="Mes siguiente" ${isCur?'disabled':''}>${I.right}</button></div>
-      <button class="fab" data-act="new-habit" aria-label="Nuevo hábito">${I.plus}</button></div>
-    <label class="mantra"><span class="eyebrow">Mantra</span><input type="text" data-mantra="${UI.month}" maxlength="80" value="${esc(mantra)}" placeholder="La intención del mes" enterkeyhint="done" autocomplete="off"></label>
-    ${kpis}${installHint()}</div>`;
-  if(!D.habits.length) return head + `<div class="wrap empty" style="border-top:1px solid var(--line-2)"><h3>Tu hoja del mes está en blanco</h3><p>Cada hábito será una columna. Marca con una X los días que lo cumples y la línea de la derecha dibuja tu evolución: un punto por cada hábito completado.</p><div class="acts"><button class="btn btn-p" data-act="new-habit">${I.plus.replace('stroke-width="2"','stroke-width="2" stroke="#fff"')}Crear primer hábito</button><button class="btn btn-t" data-act="sample">Ver con ejemplo</button></div></div>`;
+      <button class="fab" data-act="new-habit" aria-label="Nuevo hábito">${I.plus}</button></div>${hSeg()}
+    <label class="mantra"><span class="eyebrow">Mantra</span><input type="text" data-mantra="${UI.month}" maxlength="80" value="${esc(mantra)}" placeholder="La intención del mes" enterkeyhint="done" autocomplete="off"></label>${installHint()}</div>`;
   const hs = monthHabits(mi);
   if(!hs.length) return head + `<div class="wrap empty" style="border-top:1px solid var(--line-2)"><p>No había hábitos activos en ${esc(monthName(UI.month))}.</p></div>`;
-  const cols = `44px repeat(${hs.length}, minmax(40px, 1fr)) 112px`;
-  const minW = 44 + 40*hs.length + 112;
-  const scrollx = minW > window.innerWidth;
-  let g = `<div class="gh" style="grid-template-columns:${cols}"><div class="ghd">DÍA</div>${hs.map(h => `<button class="ghh" data-act="edit-habit" data-id="${h.id}" aria-label="Editar ${esc(h.name)}"><span>${esc(h.name)}</span></button>`).join('')}<div class="gha" id="jaxis"><span class="t">HÁBITOS</span></div></div><div class="rows" id="rows">`;
-  mi.days.forEach((k,i) => {
-    const d = dow(k), fut = k > t, log = D.log[k] || [];
-    g += `<div class="gr${k===t?' now':''}${d===0||d===6?' wk':''}" style="grid-template-columns:${cols}"><button class="gday" data-act="day" data-k="${k}" aria-label="${esc(longDate(k))}"><b>${i+1}</b><i>${L[d]}</i></button>`;
-    g += hs.map(h => {
-      if(!scheduledOn(h,k)) return `<span class="gc" aria-hidden="true"><span class="dot"></span></span>`;
-      if(fut) return `<span class="gc" aria-hidden="true"><span class="fut"></span></span>`;
-      const on = log.includes(h.id);
-      return `<button class="gc" data-act="cell" data-id="${h.id}" data-k="${k}" role="checkbox" aria-checked="${on}" aria-label="${esc(h.name)}, ${i+1}">${on?I.x:'<span class="box"></span>'}</button>`;
-    }).join('');
-    g += `<span aria-hidden="true"></span></div>`;
-  });
-  g += `<svg id="jchart" aria-hidden="true"></svg></div>`;
-  return head + `<div class="gwrap${scrollx?' scrollx':''}"><div class="ginner" style="min-width:${minW}px">${g}</div></div>
-    <div class="gfoot wrap"><span>${I.x}Cumplido</span><span>· No programado</span><span>Toca un día para verlo en grande, o un hábito para editarlo</span></div>`;
-}
-function drawChart(){
-  const svg = document.getElementById('jchart'), rows = document.getElementById('rows'); if(!svg || !rows) return;
-  const mi = monthInfo(UI.month), t = today(), RH = rows.firstElementChild ? rows.firstElementChild.getBoundingClientRect().height : 38;
-  const W = 112, H = mi.n * RH, px = 12;
-  const stats = mi.days.map(k => dayStats(k));
-  const maxY = Math.max(1, ...stats.map(s => s.total));
-  const X = v => px + v/maxY*(W-2*px), Y = i => i*RH + RH/2;
-  const step = maxY <= 8 ? 1 : Math.ceil(maxY/5);
-  const first = earliest();
+  // gráfico del mes
+  const W = viewW(), H = 140, PL = 16, PR = 6, PT = 20, PB = 22, iw = W-PL-PR, ih = H-PT-PB;
+  const st = mi.days.map(k => dayStats(k));
+  const maxY = Math.max(1, ...st.map(x => x.total)), step = maxY <= 6 ? 1 : Math.ceil(maxY/5);
+  const X = i => PL + i/(mi.n-1)*iw, Y = v => PT + ih - v/maxY*ih;
   const pts = [], sch = [];
-  stats.forEach((s,i) => { if(s.k > t || s.k < first) return; pts.push([X(s.n), Y(i), s.k===t]); sch.push([X(s.total), Y(i)]); });
-  const path = a => a.map((p,i) => (i?'L':'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
-  let gr = ''; for(let v=0; v<=maxY; v+=step) gr += `<line x1="${X(v)}" x2="${X(v)}" y1="0" y2="${H}" stroke="#ECEDF1" stroke-dasharray="2 3"/>`;
-  svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  svg.innerHTML = gr + (sch.length>1?`<path d="${path(sch)}" fill="none" stroke="#B9BCC6" stroke-width="1.1" stroke-dasharray="2 3"/>`:'') + (pts.length>1?`<path d="${path(pts)}" fill="none" stroke="#3447E6" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>`:'') + pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="${p[2]?3.8:2.4}" fill="${p[2]?'#3447E6':'#fff'}" stroke="#3447E6" stroke-width="1.5"/>`).join('');
-  const ax = document.getElementById('jaxis'); if(ax){ let s = '<span class="t">HÁBITOS</span>'; for(let v=0; v<=maxY; v+=step) s += `<span class="n" style="left:${X(v)}px">${v}</span>`; ax.innerHTML = s; }
+  st.forEach((x,i) => { if(x.k <= end && x.k >= first){ pts.push([X(i), Y(x.n), x]); sch.push([X(i), Y(x.total)]); } });
+  const P = a => a.map((p,i) => (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  let g = ''; for(let v=0; v<=maxY; v+=step) g += `<line x1="${PL}" x2="${W-PR}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="#ECEDF1"/><text x="0" y="${(Y(v)+3.5).toFixed(1)}" font-size="10" fill="#5F6270">${v}</text>`;
+  [1,8,15,22,mi.n].forEach(d => g += `<text x="${X(d-1).toFixed(1)}" y="${H-5}" text-anchor="middle" font-size="10" fill="#5F6270">${d}</text>`);
+  let chart = g;
+  if(pts.length > 1) chart += `<path d="${P(sch)}" fill="none" stroke="#B9BCC6" stroke-width="1.1" stroke-dasharray="2 3"/><path d="${P(pts)} L${pts[pts.length-1][0].toFixed(1)} ${Y(0).toFixed(1)} L${pts[0][0].toFixed(1)} ${Y(0).toFixed(1)} Z" fill="#3447E6" opacity=".08"/><path d="${P(pts)}" fill="none" stroke="#3447E6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  chart += pts.map((p,i) => { const last = i === pts.length-1; return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${last?4:2.4}" fill="${last?'#3447E6':'#fff'}" stroke="#3447E6" stroke-width="1.5"/>`; }).join('');
+  if(pts.length){ const q = pts[pts.length-1]; chart += `<text x="${Math.min(q[0], W-18).toFixed(1)}" y="${Math.max(12, q[1]-10).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="500" fill="#16171C">${q[2].n}/${q[2].total}</text>`; }
+  const bw = iw/(mi.n-1);
+  chart += pts.map(p => `<rect class="hit" data-act="day" data-k="${p[2].k}" x="${(p[0]-bw/2).toFixed(1)}" y="0" width="${bw.toFixed(1)}" height="${H-PB}"><title>${esc(longDate(p[2].k))} · ${p[2].n} de ${p[2].total}</title></rect>`).join('');
+  const kpis = `<div class="kpis mkpis wrap">${isCur?`<div><b>${ts.n}/${ts.total}</b><span>Hoy</span></div><div><b>${currentStreak()}</b><span>Racha</span></div>`:''}<div><b>${bestStreak()}</b><span>Mejor racha</span></div><div><b>${mo==null?'—':mo+'%'}</b><span>${isCur?'Este mes':'Del mes'}</span></div></div>`;
+  // tiras por hábito: 1 bloque por día, separación extra cada lunes
+  const CW = 9, G = 2, WG = 5; const cx = []; let x = 0;
+  mi.days.forEach((k,i) => { if(i) x += dow(k)===1 ? WG : G; cx.push(x); x += CW; });
+  const SW = W - 44, sc = SW / x, bwid = CW*sc;
+  const ticks = [1, 8, 15, 22, mi.n].filter((d,i,a) => a.indexOf(d)===i);
+  const tdi = isCur ? +t.slice(8) : null;
+  const tickHtml = ticks.filter(d => !(tdi && Math.abs(d - tdi) < 3)).map(d => `<span style="left:${((cx[d-1]+CW/2)*sc).toFixed(1)}px">${d}</span>`).join('') + (tdi ? `<span class="t" style="left:${((cx[tdi-1]+CW/2)*sc).toFixed(1)}px">hoy</span>` : '');
+  const rows = hs.map(h => {
+    let n = 0, tot = 0; let rects = '';
+    mi.days.forEach((k,i) => {
+      const xx = (cx[i]*sc).toFixed(1);
+      if(!scheduledOn(h,k)){ rects += `<rect x="${(cx[i]*sc + bwid/2 - 1.5).toFixed(1)}" y="6.5" width="3" height="3" rx="1.5" fill="#C9CBD3"/>`; return; }
+      if(k > t){ rects += `<rect x="${(+xx+.5).toFixed(1)}" y=".5" width="${(bwid-1).toFixed(1)}" height="15" rx="3" fill="none" stroke="#E7E8ED"/>`; return; }
+      const on = (D.log[k]||[]).includes(h.id); tot++; if(on) n++;
+      rects += `<rect x="${xx}" y="0" width="${bwid.toFixed(1)}" height="16" rx="3" fill="${on?'#3447E6':'#E4E6EC'}"${k===t?' stroke="#16171C" stroke-width="1.5"':''}/>`;
+    });
+    const canToday = isCur && scheduledOn(h, t) && activeOn(h, t), doneT = (D.log[t]||[]).includes(h.id);
+    const inner = `<span class="r1"><b>${esc(h.name)}</b><span>${canToday?`<em>${doneT?'Hecho hoy':'Marcar hoy'}</em>`:''}${n}/${tot} · ${tot?Math.round(n/tot*100):0}%</span></span><svg width="${SW}" height="16" viewBox="0 0 ${SW} 16" aria-hidden="true" style="overflow:visible">${rects}</svg>`;
+    return `<div class="mrow${canToday&&doneT?' done':''}">${canToday?`<button class="mb" data-act="mtoday" data-id="${h.id}" aria-pressed="${doneT}" aria-label="${esc(h.name)}: ${n} de ${tot}. Tocar para marcar hoy">${inner}</button>`:`<div class="mb">${inner}</div>`}<button class="ed" data-act="edit-habit" data-id="${h.id}" aria-label="Editar ${esc(h.name)}">${I.more}</button></div>`;
+  }).join('');
+  return head + `<div class="mchart wrap"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hábitos completados por día">${chart}</svg></div>` + kpis +
+    `<div class="wrap" style="padding-right:max(62px,env(safe-area-inset-right,0px))"><div class="mticks">${tickHtml}</div></div>${rows}
+    <div class="mleg wrap"><span><i style="background:#3447E6"></i>Cumplido</span><span><i style="background:#E4E6EC"></i>No cumplido</span><span><i style="width:3px;height:3px;border-radius:2px;background:#C9CBD3"></i>Libre</span><span>Toca un punto del gráfico para ver ese día</span></div>`;
 }
 
 /* ----- Hoy ----- */
@@ -589,7 +743,11 @@ function habitSheet(h){
     <div class="fld"><span class="lab">Categoría</span><div class="chips" id="hc">${cats.map(c=>`<button class="chip" data-c="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}</button>`).join('')}<button class="chip" data-c="__new">+ Otra</button></div><input id="hcn" type="text" maxlength="30" placeholder="Nombre de la categoría" hidden autocomplete="off"></div>
     <div class="fld" data-f="days"><span class="lab">Frecuencia</span><div class="seg" style="grid-template-columns:1fr 1fr" id="hf"><button data-v="daily" aria-pressed="${freq==='daily'}">Diaria</button><button data-v="custom" aria-pressed="${freq==='custom'}">Días específicos</button></div>
       <div class="dayp" id="hd" ${freq==='daily'?'hidden':''}>${ORDER.map(d=>`<button data-d="${d}" aria-pressed="${days.has(d)}" aria-label="${DNAME[d]}">${L[d]}</button>`).join('')}</div><span class="em">Elige al menos un día.</span></div>
-  </div><div class="sf">${isNew?'':`<button class="btn btn-d" data-del aria-label="Eliminar hábito" style="padding:0 16px">Eliminar</button>`}<button class="btn btn-p" data-save>${isNew?'Crear hábito':'Guardar'}</button></div>`, s => {
+    ${isNew?'':`<div class="zone">
+      <div class="zrow"><div><b>${h.archivedAt?'Reactivar hábito':'Archivar hábito'}</b><span>${h.archivedAt?'Vuelve a aparecer desde hoy. Su historial sigue intacto.':'Deja de aparecer desde hoy. Todo lo que marcaste se conserva y sigue visible en los meses anteriores.'}</span></div><button class="btn btn-g" data-arch>${h.archivedAt?'Reactivar':'Archivar'}</button></div>
+      <div class="zrow"><div><b style="color:var(--danger)">Eliminar definitivamente</b><span>Borra el hábito y sus ${marksOf(h.id)} marcas de todos los meses. No se puede deshacer.</span></div><button class="btn btn-d" data-purge>Eliminar</button></div>
+    </div>`}
+  </div><div class="sf"><button class="btn btn-p" data-save>${isNew?'Crear hábito':'Guardar'}</button></div>`, s => {
     const cn = s.querySelector('#hcn');
     s.querySelector('#hc').onclick = e => { const b = e.target.closest('[data-c]'); if(!b) return; if(b.dataset.c==='__new'){ cn.hidden=false; cn.focus(); cat=''; s.querySelectorAll('#hc [data-c]').forEach(x=>x.setAttribute('aria-pressed', x===b)); return; } cn.hidden=true; cat = cat===b.dataset.c ? '' : b.dataset.c; s.querySelectorAll('#hc [data-c]').forEach(x=>x.setAttribute('aria-pressed', x.dataset.c===cat)); };
     s.querySelector('#hf').onclick = e => { const b = e.target.closest('button'); if(!b) return; freq = b.dataset.v; s.querySelectorAll('#hf button').forEach(x=>x.setAttribute('aria-pressed', x===b)); s.querySelector('#hd').hidden = freq==='daily'; };
@@ -597,17 +755,19 @@ function habitSheet(h){
     s.querySelector('[data-save]').onclick = () => {
       const name = s.querySelector('#hn').value.trim(); const c = !cn.hidden ? cn.value.trim() : cat;
       const e1 = fieldErr(s,'name',!name), e2 = fieldErr(s,'days', freq==='custom' && !days.size); if(e1||e2) return;
-      if(isNew) D.habits.push({id:uid('h'), name, cat:c, freq, days:[...days], createdAt:today(), archivedAt:null});
-      else Object.assign(D.habits.find(x=>x.id===h.id), {name, cat:c, freq, days:[...days]});
+      if(isNew) D.habits.push({id:uid('h'), name, cat:c, freq, days:[...days], createdAt:today(), archivedAt:null, sched:[{from:today(), freq, days:[...days]}], pauses:[]});
+      else { const hh = D.habits.find(x=>x.id===h.id); Object.assign(hh, {name, cat:c}); setSchedule(hh, freq, [...days]); }
       closeSheet(); commit(); toast(isNew?'Hábito creado':'Hábito actualizado');
     };
-    const del = s.querySelector('[data-del]');
-    if(del) del.onclick = () => confirmSheet('Eliminar hábito', `¿Eliminar <b>${esc(h.name)}</b>? Dejará de aparecer desde hoy. Lo que marcaste antes se conserva en tu historial.`, 'Eliminar', () => {
-      const hasLog = Object.values(D.log).some(v => v.includes(h.id));
-      if(!hasLog || h.createdAt===today()){ D.habits = D.habits.filter(x=>x.id!==h.id); for(const k in D.log){ D.log[k]=D.log[k].filter(i=>i!==h.id); if(!D.log[k].length) delete D.log[k]; } }
-      else D.habits.find(x=>x.id===h.id).archivedAt = today();
-      commit(); toast('Hábito eliminado');
-    });
+    const arch = s.querySelector('[data-arch]');
+    if(arch) arch.onclick = () => { const hh = D.habits.find(x=>x.id===h.id);
+      if(hh.archivedAt){ restoreHabit(hh); closeSheet(); commit(); toast('Hábito reactivado'); return; }
+      const created = hh.createdAt === today() && !marksOf(hh.id);
+      if(created){ purgeHabit(hh.id); closeSheet(); commit(); toast('Hábito eliminado'); return; }
+      archiveHabit(hh); closeSheet(); commit(); toast('Hábito archivado · historial guardado', () => { hh.archivedAt = null; commit(); }); };
+    const purge = s.querySelector('[data-purge]');
+    if(purge) purge.onclick = () => { const n = marksOf(h.id);
+      confirmSheet('Eliminar definitivamente', `Se borrará <b>${esc(h.name)}</b> y sus <b>${n}</b> ${n===1?'marca':'marcas'} de todos los meses. Tus rachas y porcentajes se recalcularán sin él. Esto no se puede deshacer.`, 'Eliminar para siempre', () => { purgeHabit(h.id); commit(); toast('Hábito eliminado para siempre'); }); };
     if(isNew) setTimeout(()=>s.querySelector('#hn').focus(), 320);
   });
 }
@@ -671,12 +831,16 @@ function settingsSheet(){
   openSheet(`<div class="sb"><div class="shead"><h3>Ajustes</h3></div>
     <div class="setrow"><span class="eyebrow">Respaldo</span><p>Tus datos viven en este teléfono. Exporta un archivo de respaldo de vez en cuando; con él puedes recuperar todo o pasarlo a otro dispositivo.</p>
       <div class="acts"><button class="btn btn-g" data-exp>Exportar respaldo</button><label class="btn btn-g" for="imp">Importar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div></div>
+    ${D.habits.some(h=>h.archivedAt)?`<div class="setrow"><span class="eyebrow">Hábitos archivados</span><p>No aparecen en los días nuevos, pero su historial sigue en tus meses anteriores.</p>
+      <div>${D.habits.filter(h=>h.archivedAt).map(h=>`<div class="arow"><div><b>${esc(h.name)}</b><span>Archivado el ${esc(shortDate(h.archivedAt))} · ${marksOf(h.id)} marcas</span></div><button style="background:var(--sunken);color:var(--accent)" data-restore="${h.id}">Reactivar</button><button style="background:#FDECEA;color:var(--danger)" data-purge="${h.id}">Eliminar</button></div>`).join('')}</div></div>`:''}
     <div class="setrow"><span class="eyebrow">Datos</span><p>${D.habits.length} hábitos · ${D.tasks.length} tareas · ${D.cats.length} categorías</p>
       <div class="acts"><button class="btn btn-t" data-wipe style="color:var(--danger)">Borrar todos los datos</button></div></div>
-    <p style="margin:0;font-size:12.5px;color:var(--faint)">Traky 🤘 · v1</p>
+    <p style="margin:0;font-size:12.5px;color:var(--faint)">Traky 🤘 · v3</p>
   </div><div class="sf"><button class="btn btn-p" data-close>Listo</button></div>`, s => {
     s.querySelector('[data-close]').onclick = () => closeSheet();
     s.querySelector('[data-exp]').onclick = exportData;
+    s.querySelectorAll('[data-restore]').forEach(b => b.onclick = () => { restoreHabit(D.habits.find(h=>h.id===b.dataset.restore)); closeSheet(); commit(); toast('Hábito reactivado'); });
+    s.querySelectorAll('[data-purge]').forEach(b => b.onclick = () => { const h = D.habits.find(x=>x.id===b.dataset.purge), n = marksOf(h.id); confirmSheet('Eliminar definitivamente', `Se borrará <b>${esc(h.name)}</b> y sus <b>${n}</b> ${n===1?'marca':'marcas'} de todos los meses. Esto no se puede deshacer.`, 'Eliminar para siempre', () => { purgeHabit(h.id); commit(); toast('Hábito eliminado para siempre'); }); });
     s.querySelector('#imp').onchange = e => { const f = e.target.files[0]; if(f) importData(f); };
     s.querySelector('[data-wipe]').onclick = () => confirmSheet('Borrar todos los datos', 'Se eliminarán tus hábitos, historial, tareas y categorías de este teléfono. Exporta un respaldo antes si quieres conservarlos.', 'Borrar todo', () => { D = fresh(); commit(); toast('Datos borrados'); });
   });
@@ -694,7 +858,7 @@ function importData(file){
   const r = new FileReader();
   r.onload = () => {
     try{ const d = JSON.parse(r.result); if(!d || !Array.isArray(d.habits) || !Array.isArray(d.tasks)) throw 0;
-      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que hay ahora en este teléfono.`, 'Importar', () => { D = Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})}); commit(); toast('Respaldo importado'); });
+      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que hay ahora en este teléfono.`, 'Importar', () => { D = migrate(Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})})); commit(); toast('Respaldo importado'); });
     }catch(e){ toast('Ese archivo no es un respaldo de Traky'); }
   };
   r.readAsText(file);
@@ -704,7 +868,7 @@ function importData(file){
 function loadSample(){
   const t = today(), start = addDays(t, -40);
   const H = [['Leer 20 minutos','Mente','daily',[]],['Entrenar','Salud','custom',[1,3,5]],['Meditar 10 min','Mente','daily',[]],['Escribir 500 palabras','Proyecto','custom',[1,2,3,4,5]],['Tomar 2 L de agua','Salud','daily',[]]];
-  const ids = H.map(([name,cat,freq,days]) => { const id = uid('h'); D.habits.push({id,name,cat,freq,days,createdAt:start,archivedAt:null}); return id; });
+  const ids = H.map(([name,cat,freq,days]) => { const id = uid('h'); D.habits.push({id,name,cat,freq,days,createdAt:start,archivedAt:null,sched:[{from:start,freq,days}],pauses:[]}); return id; });
   let seed = 11; const rnd = () => (seed = (seed*9301+49297)%233280)/233280;
   for(let k=start; k<t; k=addDays(k,1)){ const done = ids.filter((id,i) => scheduledOn(D.habits.find(h=>h.id===id),k) && rnd() < .55 + .35*Math.sin((dparse(k).getDate()+i)/4)**2); if(done.length) D.log[k] = done; }
   D.log[t] = [ids[0], ids[4]];
@@ -736,15 +900,14 @@ document.addEventListener('click', e => {
   const a = e.target.closest('[data-act]'); if(!a || (sheetEl && sheetEl.contains(a))) return;
   const act = a.dataset.act, id = a.dataset.id;
   switch(act){
-    case 'cell': {
-      const on = toggleHabit(id, a.dataset.k);
-      a.setAttribute('aria-checked', on); a.innerHTML = on ? I.x : '<span class="box"></span>';
-      if(on){ a.classList.remove('pop'); void a.offsetWidth; a.classList.add('pop'); }
-      const v = document.querySelector('.kpis'); if(v){ const tmp = document.createElement('div'); tmp.innerHTML = viewHabits(); const nk = tmp.querySelector('.kpis'); if(nk) v.innerHTML = nk.innerHTML; }
-      drawChart(); break; }
+    case 'hview': UI.hview = a.dataset.v; if(UI.hview==='month') UI.month = UI.sel.slice(0,7); render(); window.scrollTo(0,0); break;
+    case 'wday': UI.sel = a.dataset.k; render(); break;
+    case 'week': { const n = addDays(UI.sel, +a.dataset.n); UI.sel = n > today() ? today() : n; render(); break; }
+    case 'wtoggle': { toggleHabit(id, UI.sel); render(); const b = document.querySelector(`.wck[data-id="${id}"]`); if(b && b.getAttribute('aria-pressed')==='true') b.classList.add('pop'); break; }
+    case 'mtoday': toggleHabit(id, today()); render(); break;
     case 'htoggle': toggleHabit(id, a.dataset.k); render(); break;
     case 'day': daySheet(a.dataset.k); break;
-    case 'month': { const [y,m] = UI.month.split('-').map(Number); const d = new Date(y, m-1+(+a.dataset.n), 1); const nm = `${d.getFullYear()}-${p2(d.getMonth()+1)}`; if(nm <= today().slice(0,7)){ UI.month = nm; render(); } break; }
+    case 'month': { const [y,m] = UI.month.split('-').map(Number); const d = new Date(y, m-1+(+a.dataset.n), 1); const nm = `${d.getFullYear()}-${p2(d.getMonth()+1)}`; if(nm <= today().slice(0,7)){ UI.month = nm; const ms = monthInfo(nm); UI.sel = ms.end < today() ? ms.end : today(); render(); } break; }
     case 'new-habit': habitSheet(); break;
     case 'edit-habit': habitSheet(D.habits.find(h=>h.id===id)); break;
     case 'new-task': taskSheet(null, a.dataset.cat); break;
@@ -764,7 +927,7 @@ document.addEventListener('input', e => {
   D.meta.mantra[el.dataset.mantra] = el.value; clearTimeout(mT); mT = setTimeout(() => Store.save(D), 400);
 });
 document.addEventListener('keydown', e => { if(e.key==='Enter' && e.target.dataset && e.target.dataset.mantra) e.target.blur(); if(e.key==='Escape' && sheetEl) closeSheet(); });
-document.addEventListener('visibilitychange', () => { if(!document.hidden && lastDay !== today()){ UI.month = today().slice(0,7); render(); } });
+document.addEventListener('visibilitychange', () => { if(!document.hidden && lastDay !== today()){ UI.month = today().slice(0,7); UI.sel = today(); render(); } });
 let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(render, 120); });
 
 /* ---------- boot ---------- */

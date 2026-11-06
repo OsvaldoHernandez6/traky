@@ -24,6 +24,15 @@ Hábitos y tareas con palancas, en una hoja simple. App web instalable (PWA) par
 - Se pierden si borras la app de la pantalla de inicio. Por eso: **Hoy → ⚙ Ajustes → Exportar respaldo** de vez en cuando (se guarda en Archivos o donde elijas). Con **Importar respaldo** lo recuperas, también en otro teléfono.
 - La versión que abres en Safari y la instalada guardan datos por separado: usa siempre la del ícono.
 
+## Hábitos: Semana y Mes
+- **Semana** (se abre por defecto): anillos de los 7 días, lista para marcar con un toque y cómo te fue con cada hábito esta semana. Toca un día para marcar días anteriores; con las flechas cambias de semana.
+- **Mes**: tu línea de progreso, mantra, rachas y una tira de 30 días por hábito. Toca un hábito para marcar hoy, un punto del gráfico para abrir ese día, o ••• para editar el hábito.
+
+## Historial de hábitos
+- Lo que marcas queda guardado por fecha. Si cambias la frecuencia de un hábito, el cambio rige desde ese día: los meses anteriores no se reescriben.
+- **Archivar** (desde el hábito): deja de aparecer desde hoy y su historial sigue visible en los meses anteriores. Se puede reactivar en Hoy → ⚙ Ajustes → Hábitos archivados.
+- **Eliminar definitivamente**: borra el hábito y todas sus marcas de todos los meses. No se puede deshacer.
+
 ## Actualizar la app
 Si cambias `index.html`, sube el archivo de nuevo y en `sw.js` cambia `VERSION` (por ejemplo `traky-v2`). La app se actualiza sola la próxima vez que la abras con conexión. Tus datos no se tocan.
 
