@@ -317,6 +317,49 @@ button.gc:active{background:var(--accent-soft)}
 .install{margin-top:10px;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:14px;line-height:1.4;color:var(--fg-2)}
 .install b{color:var(--fg)}
 .install button{flex:none;color:var(--muted);font-size:13px;height:28px}
+/* login */
+body.auth{padding-bottom:0}
+body.auth .tabbar{display:none}
+.login{min-height:calc(100dvh - var(--st));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding-block:40px calc(40px + var(--sb))}
+.lg-mark{width:88px;height:88px;border-radius:24px;background:var(--accent);display:grid;place-items:center;font-size:48px;line-height:1;box-shadow:0 14px 30px -14px rgba(52,71,230,.55)}
+.login h1{font-size:32px;font-weight:700;letter-spacing:-.01em;margin-top:6px}
+.login p{margin:0 0 14px;color:var(--muted);max-width:30ch;line-height:1.45}
+.gbtn{height:52px;width:100%;max-width:320px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px var(--line-2);display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:600;color:var(--fg)}
+.gbtn:active{background:var(--soft)}
+.gbtn:disabled{opacity:.6}
+.login small{font-size:12.5px;color:var(--faint);max-width:32ch;line-height:1.4;margin-top:8px}
+.login small a{color:var(--muted)}
+/* cuenta */
+.acct{display:flex;align-items:center;gap:12px;padding:4px 0}
+.acct .av{width:40px;height:40px;border-radius:20px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
+.acct div{display:flex;flex-direction:column;min-width:0}
+.acct b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct div span{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.sync{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.sync i{width:8px;height:8px;border-radius:4px;background:#2F8F7E;flex:none}
+.sync[data-state="pending"] i{background:var(--accent);animation:pulse 1s ease-in-out infinite alternate}
+.sync[data-state="error"] i{background:#C98A2B}
+.sync[data-state="local"] i{background:var(--faint)}
+@keyframes pulse{to{opacity:.3}}
+/* progreso mes a mes */
+.hlist+.mprog{border-top:0;padding-top:0}
+.mprog{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.mph{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.mph .dl{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.mph .dl.up{color:#1F6B5E}
+.mph .dl.down{color:var(--danger)}
+.mbars{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:6px;max-width:520px}
+.mbar{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:4px 0;border-radius:10px}
+.mbar em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.mbar .col{width:100%;max-width:28px;height:96px;border-radius:7px;background:var(--sunken);display:flex;align-items:flex-end;overflow:hidden}
+.mbar .col i{display:block;width:100%;background:#AEB7F5;border-radius:7px 7px 0 0;transition:height .3s}
+.mbar.cur .col i{background:var(--accent)}
+.mbar .ml{font-size:11.5px;color:var(--muted);text-transform:capitalize}
+.mbar.on .ml{color:var(--fg);font-weight:600}
+.mbar.on .col{box-shadow:0 0 0 1.5px var(--fg)}
+.mbar:active{background:var(--accent-soft)}
+.mpk{display:flex;gap:6px 18px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.mpk b{color:var(--fg);font-weight:600}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -325,19 +368,124 @@ button.gc:active{background:var(--accent-soft)}
 <nav class="tabbar" id="tabbar" aria-label="Secciones"></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
+<script src="vendor/supabase.js"></script>
 <script>
 /* =====================================================================
    Traky — hábitos y tareas con palancas.
-   Datos: se guardan en este teléfono (localStorage) bajo una sola llave.
-   La capa Store es el único punto que lee/escribe: para sincronizar con
-   una base de datos (Supabase, Firebase, API propia) basta reemplazarla.
+   Datos: en la cuenta de cada persona (Supabase, login con Google) y una
+   copia en el teléfono para funcionar sin conexión. Store + Sync son el
+   único punto que lee/escribe.
    ===================================================================== */
-const KEY = 'traky.v1';
+/* ---------- cuenta (Supabase + Google) ----------
+   Cada persona tiene una fila en la tabla traky_data con todo su Traky.
+   El teléfono guarda una copia (funciona sin conexión) y la sube al guardar. */
+const SB_URL = 'https://hwpbuegdhlhxiyqrvior.supabase.co';
+const SB_KEY = 'sb_publishable_tNdzbZRnLKlPx4pST1g7ig_wgCE-cPc';
+let sb = null;
+try{ sb = window.supabase.createClient(SB_URL, SB_KEY, { auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, flowType:'implicit', storageKey:'traky.auth' } }); }catch(e){}
+let USER = null;                 // {id, email, name} cuando hay sesión
+const LOCAL_KEY = 'traky.v1';    // datos sin cuenta (versiones anteriores)
+let KEY = LOCAL_KEY;             // copia local activa: LOCAL_KEY o LOCAL_KEY.<id usuario>
 const fresh = () => ({ v:1, habits:[], log:{}, cats:[], tasks:[], meta:{ mantra:{}, open:{} } });
+const normalize = d => Object.assign(fresh(), d||{}, { meta: Object.assign(fresh().meta, (d&&d.meta)||{}) });
+const ls = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); return true; }catch(e){ return false; } }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
+function readLocal(key){ const r = ls.get(key); if(!r) return null; try{ return normalize(JSON.parse(r)); }catch(e){ return null; } }
 const Store = {
-  load(){ try{ const r = localStorage.getItem(KEY); if(r){ const d = JSON.parse(r); return Object.assign(fresh(), d, { meta: Object.assign(fresh().meta, d.meta||{}) }); } }catch(e){} return fresh(); },
-  save(d){ try{ localStorage.setItem(KEY, JSON.stringify(d)); return true; }catch(e){ return false; } }
+  load(){ return readLocal(KEY) || fresh(); },
+  write(d){ return ls.set(KEY, JSON.stringify(d)); },
+  save(d){ const ok = this.write(d); Sync.touch(); return ok; }
 };
+const Sync = {
+  state: 'local', t: 0, busy: false, again: false,
+  rev(){ return +(ls.get(KEY+'.rev') || 0); },
+  setRev(n){ ls.set(KEY+'.rev', String(n)); },
+  dirty(){ return ls.get(KEY+'.dirty') === '1'; },
+  setDirty(b){ b ? ls.set(KEY+'.dirty','1') : ls.del(KEY+'.dirty'); },
+  touch(){
+    if(!USER) return;
+    this.setRev(Date.now()); this.setDirty(true); this.state = 'pending';
+    clearTimeout(this.t); this.t = setTimeout(() => this.push(), 700); this.paint();
+  },
+  async push(){
+    if(!USER || !sb || !this.dirty()) return true;
+    if(this.busy){ this.again = true; return false; }
+    this.busy = true; const rev = this.rev();
+    let ok = false;
+    try{ const { error } = await sb.from('traky_data').upsert({ user_id: USER.id, data: D, rev }); ok = !error; }catch(e){}
+    this.busy = false;
+    if(ok && this.rev() === rev) this.setDirty(false);
+    this.state = ok ? (this.dirty() ? 'pending' : 'ok') : 'error';
+    if(this.again){ this.again = false; this.push(); }
+    this.paint(); return ok && !this.dirty();
+  },
+  async fetch(){
+    try{ const { data, error } = await sb.from('traky_data').select('data,rev').eq('user_id', USER.id).maybeSingle(); if(error) return { error }; return { row: data }; }
+    catch(e){ return { error: e }; }
+  },
+  async pull(){
+    if(!USER || !sb) return;
+    if(this.dirty()){ await this.push(); return; }
+    const { row, error } = await this.fetch();
+    if(error){ this.state = 'error'; this.paint(); return; }
+    if(row && +row.rev > this.rev()){ D = migrate(normalize(row.data)); Store.write(D); this.setRev(+row.rev); if(!sheetEl) render(); }
+    this.state = 'ok'; this.paint();
+  },
+  label(){ return { ok:'Sincronizado', pending:'Guardando…', error:'Sin conexión · se sincroniza al volver', local:'Solo en este teléfono' }[this.state]; },
+  paint(){ const el = document.querySelector('[data-sync]'); if(el){ el.dataset.state = this.state; el.querySelector('span').textContent = this.label(); } }
+};
+async function enterUser(u){
+  USER = { id:u.id, email:u.email || '', name:(u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || '' };
+  ls.set('traky.lastUser', JSON.stringify(USER)); ls.del('traky.mode');
+  KEY = LOCAL_KEY + '.' + USER.id;
+  const local = readLocal(KEY);
+  const { row, error } = await Sync.fetch();
+  if(row && (!local || (+row.rev > Sync.rev() && !Sync.dirty()))){
+    D = migrate(normalize(row.data)); Store.write(D); Sync.setRev(+row.rev); Sync.setDirty(false); Sync.state = 'ok';
+  } else if(local){
+    D = migrate(local); Sync.state = error ? 'error' : 'ok';
+    if(Sync.dirty() || (!row && !error)){ Sync.setDirty(true); Sync.push(); }
+  } else if(!error){
+    // Primera vez con esta cuenta: lo que había en el teléfono pasa a la cuenta.
+    const phone = readLocal(LOCAL_KEY);
+    D = migrate(phone || fresh()); Store.write(D); Sync.touch();
+    if(phone && (phone.habits.length || phone.tasks.length)) setTimeout(() => toast('Tus datos de este teléfono quedaron en tu cuenta'), 400);
+  } else {
+    D = migrate(fresh()); Sync.state = 'error';
+  }
+}
+async function signIn(){
+  if(!sb){ toast('No se pudo conectar. Revisa tu conexión.'); return; }
+  const { error } = await sb.auth.signInWithOAuth({ provider:'google', options:{ redirectTo: location.origin + location.pathname, queryParams:{ prompt:'select_account' } } });
+  if(error) toast('No se pudo abrir Google. Intenta de nuevo.');
+}
+async function signOut(){
+  const ok = await Sync.push();
+  const go = async () => {
+    try{ await sb.auth.signOut(); }catch(e){}
+    ['', '.rev', '.dirty'].forEach(s => ls.del(KEY + s)); ls.del('traky.lastUser');
+    USER = null; KEY = LOCAL_KEY; D = fresh(); Sync.state = 'local'; closeSheet(true); showLogin();
+  };
+  if(ok) go();
+  else confirmSheet('Cerrar sesión', 'Hay cambios que aún no se subieron a tu cuenta porque no hay conexión. Si cierras sesión ahora se perderán.', 'Cerrar igual', go);
+}
+function useLocal(){ ls.set('traky.mode','local'); USER = null; KEY = LOCAL_KEY; D = migrate(Store.load()); Sync.state = 'local'; openApp(); }
+function showLogin(){
+  document.body.classList.add('auth');
+  document.getElementById('tabbar').innerHTML = '';
+  document.getElementById('view').innerHTML = `<div class="login wrap">
+    <div class="lg-mark" aria-hidden="true">🤘</div>
+    <h1>Traky</h1>
+    <p>Tus hábitos y tareas con palancas, guardados en tu cuenta. Revisa tu progreso mes a mes desde cualquier teléfono.</p>
+    <button class="gbtn" data-auth="google"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continuar con Google</span></button>
+    <button class="btn btn-t" data-auth="local">Usar solo en este teléfono</button>
+    <small>Solo usamos tu nombre y correo para identificar tu cuenta. <a href="privacidad.html">Privacidad</a></small>
+  </div>`;
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-auth]'); if(!a) return;
+  if(a.dataset.auth === 'google'){ a.disabled = true; signIn().finally(() => { a.disabled = false; }); }
+  else useLocal();
+});
 function migrate(d){
   for(const h of d.habits){
     if(!Array.isArray(h.sched)) h.sched = [{from: h.createdAt || dkeyNow(), freq: h.freq || 'daily', days: h.days || []}];
@@ -483,7 +631,9 @@ window.addEventListener('hashchange', () => { render(); window.scrollTo(0,0); })
 
 /* ---------- render ---------- */
 let lastDay = today();
+function openApp(){ document.body.classList.remove('auth'); render(); }
 function render(){
+  if(document.body.classList.contains('auth')) return;
   if(lastDay !== today()){ lastDay = today(); }
   const r = route();
   const tabs = [['hoy','Hoy',I.tHoy],['habitos','Hábitos',I.tHab],['tareas','Tareas',I.tTar]];
@@ -555,6 +705,31 @@ function viewWeek(){
   return head + rings + bar + `<div class="wlist">${rows}</div>` + spark;
 }
 
+/* Progreso mes a mes: % de hábitos cumplidos sobre los programados de cada mes. */
+function monthSeries(max){
+  const t = today(), cur = t.slice(0,7), first = earliest().slice(0,7), out = [];
+  let [y,m] = cur.split('-').map(Number);
+  for(let i=0; i<max; i++){
+    const ym = `${y}-${p2(m)}`; if(ym < first && out.length) break;
+    const mi = monthInfo(ym), end = mi.end < t ? mi.end : t;
+    out.unshift({ ym, pct: rangePct(mi.start, end), cur: ym === cur });
+    m--; if(!m){ m = 12; y--; }
+  }
+  return out;
+}
+function monthBars(sel){
+  const ms = monthSeries(12); if(!ms.length) return '';
+  const vals = ms.filter(x => x.pct != null), avg = vals.length ? Math.round(vals.reduce((a,x)=>a+x.pct,0)/vals.length) : null;
+  const best = vals.length ? vals.reduce((a,x) => x.pct > a.pct ? x : a) : null;
+  const prev = ms.length > 1 ? ms[ms.length-2].pct : null, now = ms[ms.length-1].pct;
+  const delta = (prev != null && now != null) ? now - prev : null;
+  const bars = ms.map(x => { const h = x.pct == null ? 0 : Math.max(3, x.pct); const on = x.ym === sel;
+    return `<button class="mbar${on?' on':''}${x.cur?' cur':''}" data-act="goto-month" data-ym="${x.ym}" aria-label="${esc(cap(monthName(x.ym)))}: ${x.pct==null?'sin datos':x.pct+'%'}" aria-pressed="${on}">
+      <em>${x.pct==null?'—':x.pct+(ms.length>7?'':'%')}</em><span class="col"><i style="height:${h}%"></i></span><span class="ml">${esc(monthName(x.ym).slice(0,3))}</span></button>`; }).join('');
+  return `<div class="mprog"><div class="mph"><h2 class="eyebrow">Progreso mes a mes</h2>${delta!=null?`<span class="dl ${delta>=0?'up':'down'}">${delta>=0?'+':''}${delta} pts vs ${esc(monthName(ms[ms.length-2].ym))}</span>`:''}</div>
+    <div class="mbars" style="--n:${ms.length}">${bars}</div>
+    ${vals.length>1?`<div class="mpk"><span>Promedio <b>${avg}%</b></span><span>Mejor mes <b>${esc(cap(monthName(best.ym)))} · ${best.pct}%</b></span></div>`:''}</div>`;
+}
 function viewMonth(){
   const mi = monthInfo(UI.month), t = today(), isCur = UI.month === t.slice(0,7), end = mi.end < t ? mi.end : t, first = earliest();
   const ts = dayStats(t), mo = mi.start <= t ? rangePct(mi.start, end) : null;
@@ -606,7 +781,8 @@ function viewMonth(){
   }).join('');
   return head + `<div class="mchart wrap"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hábitos completados por día">${chart}</svg></div>` + kpis +
     `<div class="wrap" style="padding-right:max(62px,env(safe-area-inset-right,0px))"><div class="mticks">${tickHtml}</div></div>${rows}
-    <div class="mleg wrap"><span><i style="background:#3447E6"></i>Cumplido</span><span><i style="background:#E4E6EC"></i>No cumplido</span><span><i style="width:3px;height:3px;border-radius:2px;background:#C9CBD3"></i>Libre</span><span>Toca un punto del gráfico para ver ese día</span></div>`;
+    <div class="mleg wrap"><span><i style="background:#3447E6"></i>Cumplido</span><span><i style="background:#E4E6EC"></i>No cumplido</span><span><i style="width:3px;height:3px;border-radius:2px;background:#C9CBD3"></i>Libre</span><span>Toca un punto del gráfico para ver ese día</span></div>
+    <div class="wrap">${monthBars(UI.month)}</div>`;
 }
 
 /* ----- Hoy ----- */
@@ -620,7 +796,7 @@ function viewHoy(){
     : `<p style="color:var(--muted);margin:4px 0 0">${D.habits.length?'No tienes hábitos programados para hoy.':'Aún no tienes hábitos.'}</p>`;
   const lev = blocked.length ? blocked.slice(0,6).map(tk => { const c=catOf(tk.cat), k=col(c); return `<button class="lvcard" data-act="edit-task" data-id="${tk.id}"><span class="from"><i style="background:${k.dot}"></i>${esc(c?c.name:'Sin categoría')} · ${esc(tk.title)}</span><span class="lv">${I.lever}<span>${esc(tk.palanca)}</span></span></button>`; }).join('')
     : `<p style="color:var(--muted);margin:0">Nada te está frenando. Cuando una tarea necesite algo para avanzar, escríbelo como palanca.</p>`;
-  return head + `<div class="wrap">${habits}<div class="blk"><h2><span>PALANCAS POR RESOLVER</span><span class="mono">${blocked.length||''}</span></h2>${lev}</div></div>`;
+  return head + `<div class="wrap">${habits}${D.habits.length?monthBars(null):''}<div class="blk"><h2><span>PALANCAS POR RESOLVER</span><span class="mono">${blocked.length||''}</span></h2>${lev}</div></div>`;
 }
 
 /* ----- Tareas ----- */
@@ -828,21 +1004,30 @@ function catSheet(c){
 
 /* ----- settings / backup ----- */
 function settingsSheet(){
+  const acct = USER
+    ? `<div class="setrow"><span class="eyebrow">Cuenta</span><div class="acct"><span class="av" aria-hidden="true">${esc((USER.name||USER.email||'?').trim().charAt(0).toUpperCase())}</span><div><b>${esc(USER.name || USER.email)}</b>${USER.name?`<span>${esc(USER.email)}</span>`:''}</div></div>
+      <div class="sync" data-sync data-state="${Sync.state}"><i></i><span>${Sync.label()}</span></div>
+      <div class="acts"><button class="btn btn-g" data-out>Cerrar sesión</button></div></div>`
+    : `<div class="setrow"><span class="eyebrow">Cuenta</span><p>Estás usando Traky solo en este teléfono. Entra con Google para guardar tus datos en tu cuenta y verlos en cualquier dispositivo. Lo que tienes ahora se sube al entrar.</p>
+      <div class="acts"><button class="btn btn-p" data-in>Entrar con Google</button></div></div>`;
   openSheet(`<div class="sb"><div class="shead"><h3>Ajustes</h3></div>
-    <div class="setrow"><span class="eyebrow">Respaldo</span><p>Tus datos viven en este teléfono. Exporta un archivo de respaldo de vez en cuando; con él puedes recuperar todo o pasarlo a otro dispositivo.</p>
+    ${acct}
+    <div class="setrow"><span class="eyebrow">Respaldo</span><p>${USER?'Tus datos se guardan en tu cuenta. Igual puedes exportar un archivo de respaldo cuando quieras.':'Tus datos viven en este teléfono. Exporta un archivo de respaldo de vez en cuando; con él puedes recuperar todo o pasarlo a otro dispositivo.'}</p>
       <div class="acts"><button class="btn btn-g" data-exp>Exportar respaldo</button><label class="btn btn-g" for="imp">Importar respaldo</label><input id="imp" type="file" accept="application/json,.json" hidden></div></div>
     ${D.habits.some(h=>h.archivedAt)?`<div class="setrow"><span class="eyebrow">Hábitos archivados</span><p>No aparecen en los días nuevos, pero su historial sigue en tus meses anteriores.</p>
       <div>${D.habits.filter(h=>h.archivedAt).map(h=>`<div class="arow"><div><b>${esc(h.name)}</b><span>Archivado el ${esc(shortDate(h.archivedAt))} · ${marksOf(h.id)} marcas</span></div><button style="background:var(--sunken);color:var(--accent)" data-restore="${h.id}">Reactivar</button><button style="background:#FDECEA;color:var(--danger)" data-purge="${h.id}">Eliminar</button></div>`).join('')}</div></div>`:''}
     <div class="setrow"><span class="eyebrow">Datos</span><p>${D.habits.length} hábitos · ${D.tasks.length} tareas · ${D.cats.length} categorías</p>
       <div class="acts"><button class="btn btn-t" data-wipe style="color:var(--danger)">Borrar todos los datos</button></div></div>
-    <p style="margin:0;font-size:12.5px;color:var(--faint)">Traky 🤘 · v3</p>
+    <p style="margin:0;font-size:12.5px;color:var(--faint)">Traky 🤘 · v4</p>
   </div><div class="sf"><button class="btn btn-p" data-close>Listo</button></div>`, s => {
     s.querySelector('[data-close]').onclick = () => closeSheet();
     s.querySelector('[data-exp]').onclick = exportData;
+    const out = s.querySelector('[data-out]'); if(out) out.onclick = signOut;
+    const inb = s.querySelector('[data-in]'); if(inb) inb.onclick = () => { ls.del('traky.mode'); signIn(); };
     s.querySelectorAll('[data-restore]').forEach(b => b.onclick = () => { restoreHabit(D.habits.find(h=>h.id===b.dataset.restore)); closeSheet(); commit(); toast('Hábito reactivado'); });
     s.querySelectorAll('[data-purge]').forEach(b => b.onclick = () => { const h = D.habits.find(x=>x.id===b.dataset.purge), n = marksOf(h.id); confirmSheet('Eliminar definitivamente', `Se borrará <b>${esc(h.name)}</b> y sus <b>${n}</b> ${n===1?'marca':'marcas'} de todos los meses. Esto no se puede deshacer.`, 'Eliminar para siempre', () => { purgeHabit(h.id); commit(); toast('Hábito eliminado para siempre'); }); });
     s.querySelector('#imp').onchange = e => { const f = e.target.files[0]; if(f) importData(f); };
-    s.querySelector('[data-wipe]').onclick = () => confirmSheet('Borrar todos los datos', 'Se eliminarán tus hábitos, historial, tareas y categorías de este teléfono. Exporta un respaldo antes si quieres conservarlos.', 'Borrar todo', () => { D = fresh(); commit(); toast('Datos borrados'); });
+    s.querySelector('[data-wipe]').onclick = () => confirmSheet('Borrar todos los datos', (USER?'Se eliminarán tus hábitos, historial, tareas y categorías de tu cuenta y de este teléfono.':'Se eliminarán tus hábitos, historial, tareas y categorías de este teléfono.')+' Exporta un respaldo antes si quieres conservarlos.', 'Borrar todo', () => { D = fresh(); commit(); toast('Datos borrados'); });
   });
 }
 async function exportData(){
@@ -858,7 +1043,7 @@ function importData(file){
   const r = new FileReader();
   r.onload = () => {
     try{ const d = JSON.parse(r.result); if(!d || !Array.isArray(d.habits) || !Array.isArray(d.tasks)) throw 0;
-      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que hay ahora en este teléfono.`, 'Importar', () => { D = migrate(Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})})); commit(); toast('Respaldo importado'); });
+      confirmSheet('Importar respaldo', `El archivo tiene ${d.habits.length} hábitos y ${d.tasks.length} tareas. Reemplazará lo que tienes ahora${USER?' en tu cuenta':' en este teléfono'}.`, 'Importar', () => { D = migrate(Object.assign(fresh(), d, {meta:Object.assign(fresh().meta, d.meta||{})})); commit(); toast('Respaldo importado'); });
     }catch(e){ toast('Ese archivo no es un respaldo de Traky'); }
   };
   r.readAsText(file);
@@ -917,6 +1102,7 @@ document.addEventListener('click', e => {
     case 'fold': D.meta.open[id] = !isOpen(id); commit(); break;
     case 'edit-cat': catSheet(D.cats.find(c=>c.id===id)); break;
     case 'settings': settingsSheet(); break;
+    case 'goto-month': UI.month = a.dataset.ym; { const ms = monthInfo(UI.month); UI.sel = ms.end < today() ? ms.end : today(); } UI.hview = 'month'; if(route()!=='habitos') location.hash = 'habitos'; else { render(); window.scrollTo(0,0); } break;
     case 'sample': loadSample(); break;
     case 'hide-hint': try{ localStorage.setItem('traky.hint','1'); }catch(e){} render(); break;
   }
@@ -931,7 +1117,33 @@ document.addEventListener('visibilitychange', () => { if(!document.hidden && las
 let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(render, 120); });
 
 /* ---------- boot ---------- */
-render();
+async function boot(){
+  document.body.classList.add('auth');
+  document.getElementById('view').innerHTML = '<div class="login wrap"><div class="lg-mark" aria-hidden="true">🤘</div></div>';
+  if(!sb){ useLocal(); return; }
+  const back = /access_token=|error_description=/.test(location.hash);
+  let session = null;
+  try{ const r = await sb.auth.getSession(); session = r.data && r.data.session; }catch(e){}
+  if(/error_description=/.test(location.hash)) setTimeout(() => toast('No se pudo entrar con Google. Intenta de nuevo.'), 300);
+  if(back) history.replaceState(null, '', location.pathname + '#habitos');
+  if(session){ await enterUser(session.user); openApp(); }
+  else {
+    const last = (() => { try{ return JSON.parse(ls.get('traky.lastUser')); }catch(e){ return null; } })();
+    if(last && last.id && readLocal(LOCAL_KEY + '.' + last.id) && !navigator.onLine){
+      // Sin conexión: abre la copia del teléfono y sincroniza al volver la señal.
+      USER = last; KEY = LOCAL_KEY + '.' + last.id; D = migrate(Store.load()); Sync.state = 'error'; openApp();
+    }
+    else if(ls.get('traky.mode') === 'local'){ useLocal(); }
+    else showLogin();
+  }
+  sb.auth.onAuthStateChange((ev, s) => {
+    if(ev === 'SIGNED_IN' && s && (!USER || USER.id !== s.user.id) && document.body.classList.contains('auth')) enterUser(s.user).then(openApp);
+  });
+}
+const resync = () => { if(USER && !document.hidden) Sync.pull(); };
+document.addEventListener('visibilitychange', resync);
+window.addEventListener('online', async () => { if(!USER) return; try{ await sb.auth.getSession(); }catch(e){} Sync.pull(); });
+boot();
 if('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>

@@ -1,43 +1,49 @@
-# Traky 🤘
+# Traky 🤘 · v4
 
-Hábitos y tareas con palancas, en una hoja simple. App web instalable (PWA) para iPhone: se abre a pantalla completa, funciona sin conexión y guarda los datos en el teléfono.
+Hábitos y tareas con palancas. App web instalable (PWA) para iPhone, con cuenta de Google: cada persona tiene sus datos en Supabase y ve su progreso mes a mes.
 
-## Publicarla (una vez, ~10 minutos)
+## 1. Base de datos (una vez)
+1. Supabase → **SQL Editor** → **New query**.
+2. Pega todo `supabase.sql` y toca **Run**. Debe decir *Success*.
 
-### Opción A · GitHub Pages
-1. Entra a github.com y crea un repositorio nuevo, por ejemplo `traky` (puede ser público).
-2. En el repositorio: **Add file → Upload files**, arrastra **todo el contenido** de esta carpeta (`index.html`, `manifest.webmanifest`, `sw.js` y la carpeta `icons`) y confirma con **Commit changes**.
-3. Ve a **Settings → Pages**. En *Build and deployment* elige **Deploy from a branch**, rama `main`, carpeta `/ (root)` y guarda.
-4. Espera 1–2 minutos. Tu app quedará en `https://TU-USUARIO.github.io/traky/`.
+Crea la tabla `traky_data` (una fila por persona, solo visible para su dueño) y la vista `traky_progreso_mensual` para que tú consultes el progreso de todos desde Supabase.
 
-### Opción B · Netlify (sin cuenta de GitHub)
-1. Entra a app.netlify.com/drop.
-2. Arrastra esta carpeta completa. Te da un link `https://algo.netlify.app` al instante.
+## 2. Publicar la actualización
+1. En tu repositorio de GitHub: **Add file → Upload files**.
+2. Arrastra **todo el contenido** de esta carpeta: `index.html`, `privacidad.html`, `sw.js`, `manifest.webmanifest`, `supabase.sql`, `README.md` y las carpetas `icons` y `vendor`.
+3. **Commit changes** y espera 1–2 minutos.
 
-## Instalarla en el iPhone
-1. Abre el link en **Safari** (tiene que ser Safari).
-2. Toca **Compartir** (el cuadrado con la flecha) → **Agregar a inicio** → **Agregar**.
-3. Abre Traky desde el ícono 🤘. Desde ahí funciona como cualquier app, también sin conexión.
+## 3. Revisa en Supabase
+**Authentication → URL Configuration**:
+- *Site URL:* `https://TU-USUARIO.github.io/traky/`
+- *Redirect URLs:* la misma dirección.
 
-## Tus datos
-- Se guardan en el iPhone, dentro de la app instalada. Cerrar o reiniciar el teléfono no los borra.
-- Se pierden si borras la app de la pantalla de inicio. Por eso: **Hoy → ⚙ Ajustes → Exportar respaldo** de vez en cuando (se guarda en Archivos o donde elijas). Con **Importar respaldo** lo recuperas, también en otro teléfono.
-- La versión que abres en Safari y la instalada guardan datos por separado: usa siempre la del ícono.
+Si no coincide exacta, Google te devuelve a otra página después de entrar.
 
-## Hábitos: Semana y Mes
-- **Semana** (se abre por defecto): anillos de los 7 días, lista para marcar con un toque y cómo te fue con cada hábito esta semana. Toca un día para marcar días anteriores; con las flechas cambias de semana.
-- **Mes**: tu línea de progreso, mantra, rachas y una tira de 30 días por hábito. Toca un hábito para marcar hoy, un punto del gráfico para abrir ese día, o ••• para editar el hábito.
+## 4. En el iPhone
+1. Abre Traky desde el ícono, con conexión. Si sigue igual, ciérrala desde el selector de apps y ábrela de nuevo. En **Hoy → ⚙ Ajustes** debe decir **v4**.
+2. Verás la pantalla de entrada. Toca **Continuar con Google**.
+3. La primera vez, todo lo que ya tenías en el teléfono se sube a tu cuenta.
 
-## Historial de hábitos
-- Lo que marcas queda guardado por fecha. Si cambias la frecuencia de un hábito, el cambio rige desde ese día: los meses anteriores no se reescriben.
-- **Archivar** (desde el hábito): deja de aparecer desde hoy y su historial sigue visible en los meses anteriores. Se puede reactivar en Hoy → ⚙ Ajustes → Hábitos archivados.
-- **Eliminar definitivamente**: borra el hábito y todas sus marcas de todos los meses. No se puede deshacer.
+## Cómo funciona
+- **Cuenta:** login con Google vía Supabase. Cada persona solo puede leer y escribir su propia fila (Row Level Security).
+- **Sin conexión:** el teléfono guarda una copia. Los cambios se suben solos al volver la señal. El estado se ve en Ajustes (*Sincronizado / Guardando… / Sin conexión*).
+- **Varios dispositivos:** al abrir la app trae la versión más reciente de la cuenta. Si editas en dos equipos a la vez, gana el último cambio.
+- **Eliminar de verdad:** "Eliminar definitivamente" borra el hábito y todas sus marcas, también en la cuenta.
+- **Progreso mes a mes:** en **Hoy** y al final de **Hábitos → Mes**. Barras de los últimos 12 meses con el % cumplido sobre lo programado, el cambio vs el mes anterior, el promedio y el mejor mes. Toca un mes para abrirlo.
+- **Usar sin cuenta:** "Usar solo en este teléfono" mantiene el modo anterior. Desde Ajustes se puede entrar con Google después.
 
-## Actualizar la app
-Si cambias `index.html`, sube el archivo de nuevo y en `sw.js` cambia `VERSION` (por ejemplo `traky-v2`). La app se actualiza sola la próxima vez que la abras con conexión. Tus datos no se tocan.
+## Publicar el login para cualquiera (Google)
+Mientras la app esté en *Prueba* en Google Cloud, solo entran los correos agregados como usuarios de prueba. Para abrirla:
+1. Google Auth Platform → **Información de la marca**:
+   - Página principal: `https://TU-USUARIO.github.io/traky/`
+   - Política de privacidad: `https://TU-USUARIO.github.io/traky/privacidad.html`
+   - Dominios autorizados: `TU-USUARIO.github.io`
+2. **Público → Publicar app**. Solo usa nombre y correo, así que no requiere verificación.
 
-## Estructura
-- `index.html` · toda la app (Hoy, Hábitos, Tareas). La capa `Store` es el único lugar que lee y escribe datos: para sincronizar con una base de datos (Supabase, Firebase) se reemplaza solo esa parte.
-- `manifest.webmanifest` · nombre, ícono y modo pantalla completa.
-- `sw.js` · funcionamiento sin conexión.
-- `icons/` · ícono 🤘.
+## Archivos
+- `index.html` · toda la app. `Store` y `Sync` son el único punto que lee y escribe datos.
+- `vendor/supabase.js` · cliente de Supabase (incluido para que funcione sin conexión).
+- `privacidad.html` · política de privacidad que pide Google.
+- `supabase.sql` · tabla, seguridad y vista de progreso.
+- `sw.js` · funcionamiento sin conexión. Sube `VERSION` en cada publicación.

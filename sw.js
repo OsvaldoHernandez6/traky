@@ -1,6 +1,6 @@
 /* Traky · service worker: funciona sin conexión.
    Sube VERSION cada vez que publiques cambios. */
-const VERSION = 'traky-v3';
+const VERSION = 'traky-v4';
 const SHELL = [
   './',
   './index.html',
@@ -9,7 +9,9 @@ const SHELL = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
-  './icons/favicon.png'
+  './icons/favicon.png',
+  './vendor/supabase.js',
+  './privacidad.html'
 ];
 
 self.addEventListener('install', e => {
